@@ -1,118 +1,270 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2024-08-29T16:00:56+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-08-29T16:00:56+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024/using-the-az-rest-cli-command/</loc>
-    <lastmod>2024-08-29T16:00:56+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/azure-vmware-solution-how-do-i-monitor-sddc-deployment/</loc>
-    <lastmod>2023-11-21T09:54:43+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/azure-vmware-solution-starter-links/</loc>
-    <lastmod>2023-10-26T10:23:27+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/starting-wth-rest-calls-with-az-cli-with-some-co-pilot-help/</loc>
-    <lastmod>2023-10-11T13:34:50+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/fletcherkelly/</loc>
-    <lastmod>2023-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/fletcherkelly/</loc>
-    <lastmod>2023-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/</loc>
-    <lastmod>2023-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/starting-wth-rest-calls-with-powershell/</loc>
-    <lastmod>2023-08-17T09:09:54+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/azure-cost-management-playing-with-api-in-powershell/</loc>
-    <lastmod>2023-08-03T15:24:21+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-new-ldaps-run-command/</loc>
-    <lastmod>2023-05-19T09:39:57+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part1/</loc>
-    <lastmod>2023-01-25T08:45:43+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part2/</loc>
-    <lastmod>2023-01-25T08:45:43+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part3/</loc>
-    <lastmod>2023-01-25T08:45:43+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part4/</loc>
-    <lastmod>2023-01-25T08:45:43+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2023/avs-ldaps-configure/</loc>
-    <lastmod>2023-01-09T08:39:32+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/using-arg-tolock-resources/</loc>
-    <lastmod>2022-10-03T13:59:06+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/arc-ssh-windows-linux/</loc>
-    <lastmod>2022-09-27T08:03:53+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/check-powershell-type/</loc>
-    <lastmod>2022-09-14T11:14:30+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/bicep-linux-vm-ssh-keys/</loc>
-    <lastmod>2022-06-20T08:54:21+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/openssh-powershell/</loc>
-    <lastmod>2022-04-25T14:27:03+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/poc-vwan-avs/</loc>
-    <lastmod>2022-03-28T07:27:16+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/avs-to-internet-able-or-not/</loc>
-    <lastmod>2022-03-17T16:06:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2022/new-to-avs-nomon-networking-1/</loc>
-    <lastmod>2022-03-09T16:06:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/2021-arg-networking-mgmt-more/</loc>
-    <lastmod>2021-12-09T08:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/arg-mg--query-quick-post/</loc>
-    <lastmod>2021-08-25T05:58:18+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/bicep-troubleshooting/</loc>
-    <lastmod>2021-07-02T05:40:16+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/cli-list-locations-and-peers/</loc>
-    <lastmod>2021-05-05T07:03:02+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/azure-rest-api-postman-basics/</loc>
-    <lastmod>2021-04-14T09:02:18+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/expiring-keys-azure-key-vault/</loc>
-    <lastmod>2021-01-18T07:06:03+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/azure-ghost-cms-and-cdn/</loc>
-    <lastmod>2021-01-11T07:00:18+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2021/my-new-blog-home/</loc>
-    <lastmod>2021-01-05T15:57:04+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/robinheringa/</loc>
-    <lastmod>2022-03-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2019/importance-of-networking-azure/</loc>
-    <lastmod>2019-08-07T16:33:36+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2019/csa-tools-of-the-trade/</loc>
-    <lastmod>2019-07-09T16:46:43+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2019/network-security-group-change-alerting/</loc>
-    <lastmod>2019-02-20T08:21:49+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/years/</loc>
-  </url>
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+        
+        <url>
+            <loc>http://localhost:1313/</loc>
+            <lastmod>2024-08-29T16:00:56+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/</loc>
+            <lastmod>2024-08-29T16:00:56+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2024/using-the-az-rest-cli-command/</loc>
+            <lastmod>2024-08-29T16:00:56+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/azure-vmware-solution-how-do-i-monitor-sddc-deployment/</loc>
+            <lastmod>2023-11-21T09:54:43+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/azure-vmware-solution-starter-links/</loc>
+            <lastmod>2023-10-26T10:23:27+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/starting-wth-rest-calls-with-az-cli-with-some-co-pilot-help/</loc>
+            <lastmod>2023-10-11T13:34:50+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/about/fletcherkelly/</loc>
+            <lastmod>2023-10-01T00:00:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/fletcherkelly/</loc>
+            <lastmod>2023-10-01T00:00:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/about/</loc>
+            <lastmod>2023-10-01T00:00:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/starting-wth-rest-calls-with-powershell/</loc>
+            <lastmod>2023-08-17T09:09:54+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/azure-cost-management-playing-with-api-in-powershell/</loc>
+            <lastmod>2023-08-03T15:24:21+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-new-ldaps-run-command/</loc>
+            <lastmod>2023-05-19T09:39:57+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part1/</loc>
+            <lastmod>2023-01-25T08:45:43+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part2/</loc>
+            <lastmod>2023-01-25T08:45:43+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part3/</loc>
+            <lastmod>2023-01-25T08:45:43+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-ldaps-configure-part4/</loc>
+            <lastmod>2023-01-25T08:45:43+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2023/avs-ldaps-configure/</loc>
+            <lastmod>2023-01-09T08:39:32+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/using-arg-tolock-resources/</loc>
+            <lastmod>2022-10-03T13:59:06+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/arc-ssh-windows-linux/</loc>
+            <lastmod>2022-09-27T08:03:53+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/check-powershell-type/</loc>
+            <lastmod>2022-09-14T11:14:30+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/bicep-linux-vm-ssh-keys/</loc>
+            <lastmod>2022-06-20T08:54:21+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/openssh-powershell/</loc>
+            <lastmod>2022-04-25T14:27:03+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/poc-vwan-avs/</loc>
+            <lastmod>2022-03-28T07:27:16+01:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/avs-to-internet-able-or-not/</loc>
+            <lastmod>2022-03-17T16:06:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2022/new-to-avs-nomon-networking-1/</loc>
+            <lastmod>2022-03-09T16:06:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/2021-arg-networking-mgmt-more/</loc>
+            <lastmod>2021-12-09T08:00:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/arg-mg--query-quick-post/</loc>
+            <lastmod>2021-08-25T05:58:18+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/bicep-troubleshooting/</loc>
+            <lastmod>2021-07-02T05:40:16+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/cli-list-locations-and-peers/</loc>
+            <lastmod>2021-05-05T07:03:02+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/azure-rest-api-postman-basics/</loc>
+            <lastmod>2021-04-14T09:02:18+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/expiring-keys-azure-key-vault/</loc>
+            <lastmod>2021-01-18T07:06:03+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/azure-ghost-cms-and-cdn/</loc>
+            <lastmod>2021-01-11T07:00:18+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2021/my-new-blog-home/</loc>
+            <lastmod>2021-01-05T15:57:04+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/about/robinheringa/</loc>
+            <lastmod>2022-03-28T00:00:00+00:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2019/importance-of-networking-azure/</loc>
+            <lastmod>2019-08-07T16:33:36+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2019/csa-tools-of-the-trade/</loc>
+            <lastmod>2019-07-09T16:46:43+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/posts/2019/network-security-group-change-alerting/</loc>
+            <lastmod>2019-02-20T08:21:49+02:00</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>http://localhost:1313/years/</loc>
+        </url>
+        
+    
 </urlset>
