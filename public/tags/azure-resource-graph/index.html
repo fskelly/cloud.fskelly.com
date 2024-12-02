@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/tags/azure-resource-graph/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       
+      <link href="http://localhost:1313/tags/azure-resource-graph/index.xml" rel="alternate" type="application/rss+xml" title="fletchers-cloud-blog" />
+    <meta property="og:title" content="Azure Resource Graph" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/tags/azure-resource-graph/" />
+
+
+<meta name="twitter:title" content="Azure Resource Graph"/>
+<meta name="twitter:description" content=""/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/tags'>tags</a>/<a href='http://localhost:1313/tags/azure-resource-graph'>azure-resource-graph</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Azure Resource Graph</h1>
+<br/>
+
+
+<div class="posts-list">
+
+    
+        <div class="post">
+            <p>
+                <div class="date">Oct. 3, 2022</div>    
+                <h1><a href="http://localhost:1313/posts/2022/using-arg-tolock-resources/" title="Using Azure Resource Graph and Tags to lock items in Azure">Using Azure Resource Graph and Tags to lock items in Azure</a></h1>
+                <h2 id="what-are-we-doing">What are we doing?</h2>
+<p>We are going to use Azure Resource Graph to find items with a specific tag, in this case <em>{&ldquo;toBeLocked&rdquo;=&ldquo;Yes&rdquo;}</em> and then place a resource lock on them.</p>
+<h2 id="constraints--limitations">Constraints / limitations</h2>
+<ol>
+<li>Use Azure Resource Graph to perform the search. Very fast and gives you a new way to interface with Azure Resources.</li>
+<li>As part of this post, I am giving samples below to create items, you could use these for testing. Please test and make sure with production environment.</li>
+<li>You are using an account that can create locks and potentially remove if needed during the testing.</li>
+</ol>
+<h2 id="lets-build-this">Lets build this</h2>
+<h3 id="steps">Steps</h3>
+<ol>
+<li>Create sample items</li>
+<li>Build Azure Resource Graph Queries</li>
+<li>Getting items from the query programmatically</li>
+<li>Adding locks</li>
+<li>Result</li>
+</ol>
+<h3 id="create-sample-items-to-lock">Create sample items to lock</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## create resource group</span>
+</span></span><span style="display:flex;"><span>$rgName = <span style="color:#e6db74">&#34;toberesourcelocked&#34;</span>
+</span></span><span style="display:flex;"><span>$rgLocation = <span style="color:#e6db74">&#34;northeurope&#34;</span>
+</span></span><span style="display:flex;"><span>$rg = new-azresourcegroup -name $rgname -location $rgLocation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## create items</span>
+</span></span><span style="display:flex;"><span>$guid = New-Guid
+</span></span><span style="display:flex;"><span>$saName = <span style="color:#e6db74">&#34;sa&#34;</span>
+</span></span><span style="display:flex;"><span>$saSuffix = $guid.ToString().Split(<span style="color:#e6db74">&#34;-&#34;</span>)[<span style="color:#ae81ff">0</span>]+$guid.ToString().Split(<span style="color:#e6db74">&#34;-&#34;</span>)[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>$saName = (($saName.replace(<span style="color:#e6db74">&#34;-&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>))+$saSuffix)
+</span></span><span style="display:flex;"><span>New-AzStorageAccount -ResourceGroupName $rgName -Name $saName -Location $rgLocation -AccountType Standard_LRS
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## create tag(s)</span>
+</span></span><span style="display:flex;"><span>$tags = @{<span style="color:#e6db74">&#34;toBeLocked&#34;</span>=<span style="color:#e6db74">&#34;Yes&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## get items in Resource Group and tag them</span>
+</span></span><span style="display:flex;"><span>$items = Get-AzResource -ResourceGroupName $rgName
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($item <span style="color:#66d9ef">in</span> $items)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Update-AzTag -ResourceId $item.ResourceId -Tag $tags -Operation Replace
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## update resource group with tag(s)</span>
+</span></span><span style="display:flex;"><span>Update-AzTag -ResourceId $rg.ResourceId -Tag $tags -Operation Replace
+</span></span></code></pre></div><h3 id="build-azure-resource-graph-queries">Build Azure Resource Graph Queries</h3>
+<h4 id="including-resource-groups">Including Resource Groups</h4>
+<pre tabindex="0"><code class="language-azurecli" data-lang="azurecli">resourcecontainers
+| where type == &#34;microsoft.resources/subscriptions/resourcegroups&#34;
+| mv-expand bagexpansion=array tags
+| where isnotempty(tags)
+| where tags[0] =~ &#39;toBeLocked&#39; and tags[1] =~ &#39;Yes&#39;
+| project  name,type,location,subscriptionId,tags
+| union (resources 
+| mv-expand bagexpansion=array tags
+| where isnotempty(tags)
+| where tags[0] =~ &#39;toBeLocked&#39; and tags[1] =~ &#39;Yes&#39;
+| project name,type,location,subscriptionId,tags,id)
+</code></pre><h4 id="excluding-resource-groups">Excluding Resource Groups</h4>
+<pre tabindex="0"><code class="language-azurecli" data-lang="azurecli">Resources
+| mv-expand bagexpansion=array tags
+| where isnotempty(tags)
+| where tags[0] =~ &#39;toBeLocked&#39; and tags[1] =~ &#39;Yes&#39;
+</code></pre><h4 id="resource-groups-only">Resource Groups Only</h4>
+<pre tabindex="0"><code class="language-azurecli" data-lang="azurecli">ResourceContainers
+| where type =~ &#39;microsoft.resources/subscriptions/resourcegroups&#39;
+| where tags[&#39;toBeLocked&#39;] =~ &#39;Yes&#39;
+</code></pre><h3 id="getting-items-from-the-query-programmatically">Getting items from the query programmatically</h3>
+<p>We now have the required queries and you can pick whichever one above suits your needs, I am going to be using <a href="#including-resource-groups">Including Resource Groups</a>. Now we need a way to act against these resources. I am personally quite a fan of <a href="https://learn.microsoft.com/en-us/powershell/">PowerShell</a> so I will provide this sample. You can use <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/first-query-powershell#add-the-resource-graph-module">this</a> as a base for my example below. When running the query in <a href="https://learn.microsoft.com/en-us/powershell/">PowerShell</a>, I find <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_splatting?view=powershell-7.2">splatting</a> is easiest for <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">Azure Resource Graph</a> queries</p>
+            </p>
+        </div>
+    
+
+</div>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

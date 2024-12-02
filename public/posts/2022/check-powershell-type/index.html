@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/posts/2022/check-powershell-type/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Check Powershell Console Type" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2022/check-powershell-type/" /><meta property="article:published_time" content="2022-09-14T11:14:30+01:00" />
+
+
+
+<meta name="twitter:title" content="Check Powershell Console Type"/>
+<meta name="twitter:description" content="I have been working with some Microsoft Hybrid technologies. My specific example here is around Azure Arc-enabled VMware vSphere aspects. When running the scripts provided here there is a key aspect.
+Do NOT run this in the PowerShell ISE.
+Even with this strong recommendation, it is often accidentally used as it is really easy to perform this action with a right click option and this got me to thinking about how can I check this via code?"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/posts'>posts</a>/<a href='http://localhost:1313/posts/2022'>2022</a>/<a href='http://localhost:1313/posts/2022/check-powershell-type'>check-powershell-type</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Check Powershell Console Type</h1>
+
+Sep. 14, 2022
+
+
+<br/><br/>
+<p>I have been working with some Microsoft Hybrid technologies. My specific example here is around <a href="https://docs.microsoft.com/en-us/azure/azure-arc/vmware-vsphere/overview">Azure Arc-enabled VMware vSphere</a> aspects. When running the scripts provided here there is a key aspect.</p>
+<p><strong>Do NOT run this in the PowerShell ISE.</strong></p>
+<p>Even with this strong recommendation, it is often accidentally used as it is really easy to perform this action with a right click option and this got me to thinking about how can I check this via code?</p>
+<p>So I did some thinking and found a way to check which console type you are running. Below is sample code but will exit the script if the Console Type is ISE.</p>
+<h2 id="how-do-we-check-this-and-prevent-this">How do we check this and prevent this?</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$consoleType = get-host
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($consoleType.Name <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;ise&#39;</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $message = <span style="color:#e6db74">&#34;You should NOT use the ISE window, please reload in PowerShell window&#34;</span>
+</span></span><span style="display:flex;"><span>    Write-Output $message
+</span></span><span style="display:flex;"><span>    $message = <span style="color:#e6db74">&#34;This process will terminate shortly&#34;</span>
+</span></span><span style="display:flex;"><span>    Write-Output $message
+</span></span><span style="display:flex;"><span>    Start-Sleep -Seconds <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    $message = <span style="color:#e6db74">&#34;good to go&#34;</span>
+</span></span><span style="display:flex;"><span>    Write-Output $message
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Very simple fix but can save hours of troubleshooting.</p>
+<p>You may even notice the change to <strong>write-output</strong> from <strong>write-host</strong> as part of <a href="https://devblogs.microsoft.com/powershell/using-psscriptanalyzer-to-check-powershell-version-compatibility/">Cross platform support</a></p>
+
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/posts/2021/cli-list-locations-and-peers/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Cli List Locations and Peers" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2021/cli-list-locations-and-peers/" /><meta property="article:published_time" content="2021-05-05T07:03:02+02:00" />
+
+
+
+<meta name="twitter:title" content="Cli List Locations and Peers"/>
+<meta name="twitter:description" content="How to use the Azure CLI to list Azure Locations and their peers
+So this will be a &ldquo;quick post&rdquo; that shows some great functionality within the Azure CLI with az account list-locations. With this command you can expect some output like below, you actually get a lot of content back.
+{
+    &#34;displayName&#34;: &#34;Brazil Southeast&#34;,
+    &#34;id&#34;: &#34;/subscriptions/949ef534-07f5-4138-8b79-aae16a71310c/locations/brazilsoutheast&#34;,
+    &#34;metadata&#34;: {
+      &#34;geographyGroup&#34;: &#34;South America&#34;,
+      &#34;latitude&#34;: &#34;-22.90278&#34;,
+      &#34;longitude&#34;: &#34;-43.2075&#34;,
+      &#34;pairedRegion&#34;: [
+        {
+          &#34;id&#34;: &#34;/subscriptions/949ef534-07f5-4138-8b79-aae16a71310c/locations/brazilsouth&#34;,
+          &#34;name&#34;: &#34;brazilsouth&#34;,
+          &#34;subscriptionId&#34;: null
+        }
+      ],
+      &#34;physicalLocation&#34;: &#34;Rio&#34;,
+      &#34;regionCategory&#34;: &#34;Other&#34;,
+      &#34;regionType&#34;: &#34;Physical&#34;
+    },
+    &#34;name&#34;: &#34;brazilsoutheast&#34;,
+    &#34;regionalDisplayName&#34;: &#34;(South America) Brazil Southeast&#34;,
+    &#34;subscriptionId&#34;: null
+}
+If you look at some of the examples, you will also see some &ldquo;logical&rdquo; locations, example below, there is a way of adding a query to remove these to display only &ldquo;physical&rdquo; locations."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/posts'>posts</a>/<a href='http://localhost:1313/posts/2021'>2021</a>/<a href='http://localhost:1313/posts/2021/cli-list-locations-and-peers'>cli-list-locations-and-peers</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Cli List Locations and Peers</h1>
+
+May. 5, 2021
+
+
+<br/><br/>
+<h1 id="how-to-use-the-azure-cli-to-list-azure-locations-and-their-peers">How to use the Azure CLI to list Azure Locations and their peers</h1>
+<p>So this will be a &ldquo;quick post&rdquo; that shows some great functionality within the <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a> with <code>az account list-locations</code>. With this command you can expect some output like below, you actually get a lot of content back.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;Brazil Southeast&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;/subscriptions/949ef534-07f5-4138-8b79-aae16a71310c/locations/brazilsoutheast&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;metadata&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;geographyGroup&#34;</span>: <span style="color:#e6db74">&#34;South America&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;latitude&#34;</span>: <span style="color:#e6db74">&#34;-22.90278&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;longitude&#34;</span>: <span style="color:#e6db74">&#34;-43.2075&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pairedRegion&#34;</span>: <span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;/subscriptions/949ef534-07f5-4138-8b79-aae16a71310c/locations/brazilsouth&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;brazilsouth&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;subscriptionId&#34;</span>: null
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;physicalLocation&#34;</span>: <span style="color:#e6db74">&#34;Rio&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;regionCategory&#34;</span>: <span style="color:#e6db74">&#34;Other&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;regionType&#34;</span>: <span style="color:#e6db74">&#34;Physical&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;brazilsoutheast&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;regionalDisplayName&#34;</span>: <span style="color:#e6db74">&#34;(South America) Brazil Southeast&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;subscriptionId&#34;</span>: null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>If you look at some of the examples, you will also see some <em>&ldquo;logical&rdquo;</em> locations, example below, there is a way of adding a query to remove these to display only <strong>&ldquo;physical&rdquo;</strong> locations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;United States&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;/subscriptions/949ef534-07f5-4138-8b79-aae16a71310c/cations/unitedstates&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;geographyGroup&#34;</span>: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;latitude&#34;</span>: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;longitude&#34;</span>: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;pairedRegion&#34;</span>: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;physicalLocation&#34;</span>: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;regionCategory&#34;</span>: <span style="color:#e6db74">&#34;Other&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;regionType&#34;</span>: <span style="color:#e6db74">&#34;Logical&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;unitedstates&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;regionalDisplayName&#34;</span>: <span style="color:#e6db74">&#34;United States&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;subscriptionId&#34;</span>: null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>I use a simple query to remove all locations without latitide and in my case simply return the <strong>Region Name</strong> 😄</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>az account list-locations --query <span style="color:#e6db74">&#34;[?not_null(metadata.latitude)] .{RegionName:name}&#34;</span> --output json
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;RegionName&#34;</span>: <span style="color:#e6db74">&#34;brazilsoutheast&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>So, now to get the paired region, again if we look at the JSON output, there is ALWAYS only 1 result within the array for Paired Region; as per this only 1 paired region 😄. We will use this to our advantage</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>az account list-locations --query <span style="color:#e6db74">&#34;[?not_null(metadata.latitude)] .{RegionName:name, PairedRegion:metadata.pairedRegion[0].name}&#34;</span> --output json
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;PairedRegion&#34;</span>: <span style="color:#e6db74">&#34;brazilsouth&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;RegionName&#34;</span>: <span style="color:#e6db74">&#34;brazilsoutheast&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

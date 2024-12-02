@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/posts/2023/avs-ldaps-configure-part3/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 3" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2023/avs-ldaps-configure-part3/" /><meta property="article:published_time" content="2023-01-25T08:45:43+00:00" />
+
+
+
+<meta name="twitter:title" content="Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 3"/>
+<meta name="twitter:description" content="Author(s): Robin Heringa and Fletcher Kelly
+Implementing LDAPS identity integration with Azure VMware Solution series - 3 of 4
+This is the third part of the blog series on how to implement LDAPS identity integration with Azure VMware Solution. Other parts of this series can be found here:
+
+LDAPS integration - part 1 of 4
+LDAPS integration - part 2 of 4
+LDAPS integration - part 4 of 4
+
+Implement LDAPS integration
+The following sections will guide you through the required process step-by-step"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/posts'>posts</a>/<a href='http://localhost:1313/posts/2023'>2023</a>/<a href='http://localhost:1313/posts/2023/avs-ldaps-configure-part3'>avs-ldaps-configure-part3</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 3</h1>
+
+Jan. 25, 2023
+
+
+<br/><br/>
+<p>Author(s): <a href="/about/robinheringa/">Robin Heringa</a> and <a href="/about/fletcherkelly/">Fletcher Kelly</a></p>
+<h1 id="implementing-ldaps-identity-integration-with-azure-vmware-solution-series---3-of-4">Implementing LDAPS identity integration with Azure VMware Solution series - 3 of 4</h1>
+<p>This is the third part of the blog series on how to implement LDAPS identity integration with Azure VMware Solution. Other parts of this series can be found here:</p>
+<ol>
+<li><a href="../avs-ldaps-configure-part1/">LDAPS integration - part 1 of 4</a></li>
+<li><a href="../avs-ldaps-configure-part2/">LDAPS integration - part 2 of 4</a></li>
+<li><a href="../avs-ldaps-configure-part4/">LDAPS integration - part 4 of 4</a></li>
+</ol>
+<h1 id="implement-ldaps-integration">Implement LDAPS integration</h1>
+<p>The following sections will guide you through the required process step-by-step</p>
+<h2 id="check-domain-controller-certificates-and-ldaps">Check domain controller certificates and LDAPS</h2>
+<p>It is important to validate that the identity provider (in most cases Active Directory) is configured to support LDAPS based authentication requests before continuing with the LDAPS integration setup.</p>
+<p>For each domain controller that is designated for use with Azure VMware Solution, check if the required certificate(s) with the &ldquo;server authentication&rdquo; intended purpose are present in the computer certificate store. The &ldquo;Certificates&rdquo; snap-in for the Microsoft Management Console (mmc.exe) offers a simple way to do this.</p>
+<p>After locally or remotely opening the computer certificate store:</p>
+<ol>
+<li>Expand the &ldquo;Personal&rdquo; certificate store and click &ldquo;Certificates&rdquo;;</li>
+<li>Check if the store contains certificates with the &ldquo;Server Authentication&rdquo; intended purpose.</li>
+</ol>
+<p>Available certificates for <strong>avs-gwc-dc001.avsemea.com</strong>:
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/1-avs-gwc-dc001-certificates.jpg"
+    alt="avs-gwc-dc001-certificates mmc">
+</figure>
+</p>
+<p>Available certificates for <strong>avs-gwc-dc002.avsemea.com</strong>:
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/2-avs-gwc-dc002-certificates.jpg"
+    alt="avs-gwc-dc002-certificates mmc">
+</figure>
+</p>
+<p>Next we need to verify whether the Active Directory domain controllers are configured to offer LDAPS services:</p>
+<ol>
+<li>Open a &ldquo;Command prompt&rdquo; windows;</li>
+<li>Run the command &ldquo;Netstat -a&rdquo;;</li>
+<li>Verify that there is an active listener for TCP port 636.</li>
+</ol>
+<p>LDAPS listener for <strong>avs-gwc-dc001.avsemea.com</strong>:
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/3-avs-gwc-dc001-netstat.jpg"
+    alt="avs-gwc-dc001-netstat-results">
+</figure>
+</p>
+<p>LDAPS listener for <strong>avs-gwc-dc002.avsemea.com</strong>:
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/4-avs-gwc-dc002-netstat.jpg"
+    alt="avs-gwc-dc002-netstat-results">
+</figure>
+</p>
+<h2 id="extract-correct-domain-controller-certificates">Extract (correct) domain controller certificates</h2>
+<p>As a next step the certificates used by the domain controllers for LDAPS services need to be extracted from the domain controllers. This step is always performed by executing the script shown in the image below. The reason for this is to ensure we extract the correct certificate which is &ldquo;attached&rdquo; to the LDAPS service. When multiple certificates are available with the &ldquo;Server Authentication&rdquo; intended purpose, the domain controller selects one of them to be used for LDAPS.</p>
+<p>With the following commands we will connect to the required domain controllers. In our scenario, these are <strong>avs-gwc-dc001.avsemea.com</strong> and <strong>avs-gwc-dc002.avsemea.com</strong> and we then use OpenSSL to extract the required certificates. You will need to specify the path of your openssl.exe, currently tested version is 3.0 and was installed with <a href="https://community.chocolatey.org/packages/openssl">Chocolatey</a>. Our install path is <strong>C:\Program Files\OpenSSL-Win64\bin\openssl.exe</strong>. You will need to update the export path to suit your needs, we chose to use <strong>c:\certTemp</strong></p>
+<p><strong>Notes</strong><br>
+<em><strong>$openSSLFilePath</strong></em> may need to be changed, was installed using <a href="https://community.chocolatey.org/packages/openssl">chocolatey</a> in our example.<br>
+<em><strong>$remoteComputers</strong></em> would need to be changed to suit your environment.<br>
+<em><strong>$exportFolder</strong></em> can be changed to something more suitable for your environment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## Get certs</span>
+</span></span><span style="display:flex;"><span>$openSSLFilePath = <span style="color:#e6db74">&#34;C:\Program Files\OpenSSL-Win64\bin\openssl.exe&#34;</span>
+</span></span><span style="display:flex;"><span>$remoteComputers = <span style="color:#e6db74">&#34;avs-gwc-dc001.avsemea.com&#34;</span>,<span style="color:#e6db74">&#34;avs-gwc-dc002.avsemea.com&#34;</span>
+</span></span><span style="display:flex;"><span>$port = <span style="color:#e6db74">&#34;636&#34;</span>
+</span></span><span style="display:flex;"><span>$exportFolder = <span style="color:#e6db74">&#34;c:\temp\&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($computer <span style="color:#66d9ef">in</span> $remoteComputers)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $output =  echo <span style="color:#e6db74">&#34;1&#34;</span> | &amp; $openSSLFilePath <span style="color:#e6db74">&#34;s_client&#34;</span> <span style="color:#e6db74">&#34;-connect&#34;</span> <span style="color:#e6db74">&#34;</span>$computer<span style="color:#e6db74">`:</span>$port<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;-showcerts&#34;</span> | out-string
+</span></span><span style="display:flex;"><span>    $Matches = $null
+</span></span><span style="display:flex;"><span>    $cn = $output <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;0 s\:CN = (?&lt;cn&gt;.*?)\r\n&#34;</span>
+</span></span><span style="display:flex;"><span>    $cn = $Matches.cn
+</span></span><span style="display:flex;"><span>    $Matches = $null
+</span></span><span style="display:flex;"><span>    $certs = select-string -inputobject $output -pattern <span style="color:#e6db74">&#34;(?s)(?&lt;cert&gt;-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----)&#34;</span> -allmatches
+</span></span><span style="display:flex;"><span>    $cert = $certs.matches[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    $exportPath = $exportFolder+($computer.split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>])+<span style="color:#e6db74">&#34;.cer&#34;</span>
+</span></span><span style="display:flex;"><span>    $cert.Value | Out-File $exportPath -Encoding ascii
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/5-powershell-cert-extract.jpg"
+    alt="PowerShell-using-openssl-to-extract-certs">
+</figure>
+
+<h2 id="validate-domain-controller-certificate-requirements">Validate domain controller certificate requirements</h2>
+<p>The next step is to ensure that the certificate extraction was performed successfully. This will always be a manual step in the process.</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/6-certificate-properties.jpg"
+    alt="Exported-certificate-properties">
+</figure>
+
+<p>As displayed in the image above:</p>
+<ol>
+<li>Open Windows Explorer (or use the one opened in the previous step if not closed already 😊) and browse to the location where the certificates were extracted to. In our scenario the folder is c:\certTemp;</li>
+<li>Open the certificates by right-clicking and selecting &ldquo;Open&rdquo;</li>
+</ol>
+<p>For each of the certificates:</p>
+<ol start="3">
+<li>Select the &ldquo;General&rdquo; tab at the top;</li>
+<li>Verify that &ldquo;Proves your identity to a remote computer&rdquo; is available as an intended purpose;</li>
+<li>Verify that domain controller fully qualified domain name FQDN) is present in the &ldquo;Issued to&rdquo; field. In our scenario: <strong>avs-gwc-dc001.avsemea.com</strong> and <strong>avs-gwc-dc002.avsemea.com</strong>.</li>
+<li>Verify that the certificate is still valid by checking the &ldquo;Valid from&rdquo; field.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/7-certificate-certification-path.jpg"
+    alt="Certification-path-of-the-certificate">
+</figure>
+
+<p>To complete the certificate verification process, for each certificate:</p>
+<ol>
+<li>Click the &ldquo;Certification Path&rdquo; tab at the top;</li>
+<li>Verify that the full certificate authority chain is available in the &ldquo;Certification path&rdquo; field.
+In our scenario the field contains the name of the root certification authority <strong>avsemea-avs-gwc-rootca</strong> and the full certificate name for the respective domain controller the certificate is issued to. In our scenario <strong>avs-gwc-dc001.avsemea.com</strong> and <strong>avs-gwc-dc002.avsemea.com</strong>.</li>
+</ol>
+<h2 id="create-azure-storage-account">Create Azure Storage account</h2>
+<p>The following content is divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
+<h3 id="manual-deployment">Manual deployment</h3>
+<p>As part of this manual process a storage account will be created that is used to store the domain controller certificates for later use by the &ldquo;New-LDAPSIdentitySource&rdquo; run-command.</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/8-manual-storage-account-create.jpg"
+    alt="create-storage-account-from-portal">
+</figure>
+
+<p>In the Azure Portal:</p>
+<ol>
+<li>Click on &ldquo;Storage accounts&rdquo; in the left navigation panel;</li>
+<li>Click &ldquo;+ Create&rdquo; at the top to create a new storage account. The &ldquo;Create a storage account&rdquo; blade will now be displayed.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/9-manual-storage-account-create-2.jpg"
+    alt="create-storage-account-from-portal-storage-account-information">
+</figure>
+
+<p>On the &ldquo;basics&rdquo; tab:</p>
+<ol>
+<li>In the &ldquo;Subscription&rdquo; drop-down menu make sure you select the subscription where Azure VMware Solution has been deployed into. In our scenario this is the <strong>Azure CXP FTA Internal – AZFTA subscription</strong>;</li>
+<li>Select the resource group you want to create the storage account into. In our case <strong>avs-germanywestcentral-operational_rg</strong>.</li>
+<li>In the &ldquo;Storage account name&rdquo; box, enter a globally unique name for the storage account. We recommend to use a descriptive name postfixed with a GUID. In our scenario we used <strong>avsgwcsa14a2c2db</strong>;</li>
+<li>In the &ldquo;Region&rdquo; drop-down menu be sure to select the same region as where Azure VMware Solution is deployed. In our scenario <strong>Germany West Central</strong>.</li>
+<li>As this storage account has no need for changing any of the default settings, click &ldquo;Review&rdquo; at the bottom of the screen.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/10-manual-storage-account-review.jpg"
+    alt="create-storage-account-from-portal-storage-account-review">
+</figure>
+
+<p>On the review screen:</p>
+<ol>
+<li>Double-check the values for &ldquo;Subscription&rdquo;, &ldquo;Resource Group&rdquo;, &ldquo;Location&rdquo; and &ldquo;Storage account name&rdquo;;</li>
+<li>Click &ldquo;Create&rdquo;.
+After a few minutes the creation of the storage account should be completed:</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/11-manual-storage-account-review-2.jpg"
+    alt="create-storage-account-from-portal-storage-account-review-complete">
+</figure>
+
+<h3 id="automated-deployment">Automated deployment</h3>
+<p>With these commands, we will check for the Azure Module, install them if missing and then continue the script. We will create the required storage account, or use an existing storage account. The <strong>$storageAccountName</strong>  and <strong>$resourceGroupLocation</strong> variables can be updated or replaced as needed to meet your needs. These scripts are designed to be run in sections one after each other to ensure the variable names are correctly referenced.</p>
+<p><strong>Notes</strong><br>
+<em><strong>$resourceGroupLocation</strong></em> will need to be updated to your desired location.<br>
+<em><strong>$storageRgName</strong></em> will need to be updated.<br>
+<em><strong>$storageAccountName</strong></em> will need to be updated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## Do you have the Azure Module installed?</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (Get-Module -ListAvailable -Name Az.Storage)
+</span></span><span style="display:flex;"><span>    { write-output <span style="color:#e6db74">&#34;Module exists&#34;</span> }        
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;Module does not exist&#34;</span>
+</span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;installing Module&#34;</span>
+</span></span><span style="display:flex;"><span>    Install-Module -name Az.Storage -Scope CurrentUser -Force -AllowClobber
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## create storage account</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$resourceGroupLocation = <span style="color:#e6db74">&#34;germanywestcentral&#34;</span>
+</span></span><span style="display:flex;"><span>$storageRgName = <span style="color:#e6db74">&#34;avs-</span>$resourceGroupLocation<span style="color:#e6db74">-operational_rg&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Storage account variables</span>
+</span></span><span style="display:flex;"><span>$guid = New-Guid
+</span></span><span style="display:flex;"><span>$storageAccountName = <span style="color:#e6db74">&#34;avsgwcsa&#34;</span>
+</span></span><span style="display:flex;"><span>$storageAccountNameSuffix = $guid.ToString().Split(<span style="color:#e6db74">&#34;-&#34;</span>)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>$storageAccountName = (($storageAccountName.replace(<span style="color:#e6db74">&#34;-&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>))+$storageAccountNameSuffix )
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Define tags to be used if needed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## tags can be modified to suit your needs, another example below.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#$tags = @{&#34;Environment&#34;=&#34;Development&#34;;&#34;Owner&#34;=&#34;FTA&#34;;&#34;CostCenter&#34;=&#34;123456&#34;}</span>
+</span></span><span style="display:flex;"><span>$tags = @{<span style="color:#e6db74">&#34;deploymentMethod&#34;</span>=<span style="color:#e6db74">&#34;PowerShell&#34;</span>; <span style="color:#e6db74">&#34;Technology&#34;</span>=<span style="color:#e6db74">&#34;AVS&#34;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## create storage account</span>
+</span></span><span style="display:flex;"><span>$saCheck = Get-AzStorageAccount -ResourceGroupName $storageRgName -Name $storageAccountName -ErrorAction SilentlyContinue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($null <span style="color:#f92672">-eq</span> $saCheck)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    New-AzStorageAccount -ResourceGroupName $storageRgName -Name $storageAccountName -Location $resourceGroupLocation -SkuName Standard_LRS -Kind StorageV2 -EnableHttpsTrafficOnly $true -Tags $tags
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Storage account created: </span>$storageAccountName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;Storage Account already exists&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/12-automated-create-storage-account.jpg"
+    alt="scripted-creation-of-storage-account">
+</figure>
+
+<h2 id="create-storage-blob-container">Create Storage Blob container</h2>
+<p>The next step is to create a blob container to help structure/organize the resources required for the LDAPS identity integration.
+The following content is divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
+<h3 id="manual-deployment-1">Manual deployment</h3>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/13-manual-create-container.jpg"
+    alt="create-storage-container">
+</figure>
+
+<p>In the Azure Portal:</p>
+<ol>
+<li>In the left navigation pane, click &ldquo;Storage accounts&rdquo;;</li>
+<li>In the list of storage accounts, select the storage account created in the previous step. In our scenario <strong>avsgwcsa14a2c2db</strong>;</li>
+<li>Select &ldquo;Containers&rdquo; under the &ldquo;Data storage&rdquo; category;</li>
+<li>Click &ldquo;+ Container&rdquo; to create a new container in the storage account.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/14-manual-create-container-2.jpg"
+    alt="create-storage-container-final" height="300">
+</figure>
+
+<p>In the &ldquo;New container&rdquo; dialog:</p>
+<ol>
+<li>In the &ldquo;Name&rdquo; field, type a descriptive name for the new container. In our scenario <strong>ldaps-blog-post</strong>.</li>
+<li>Click &ldquo;Create&rdquo;
+The new container should now be created and displayed in the &ldquo;Containers&rdquo; view for the storage account:</li>
+</ol>
+<h3 id="automated-deployment-1">Automated deployment</h3>
+<p>With these commands, we will create the container to upload the earlier exported certificates to, this will be important for the creation of the SAS Tokens for the AVS LDAPS Run Command.</p>
+<p><strong>Notes</strong><br>
+<em><strong>$containerName</strong></em> will need to be updated</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## create container</span>
+</span></span><span style="display:flex;"><span>$containerName = <span style="color:#e6db74">&#34;ldaps-blog-post&#34;</span>
+</span></span><span style="display:flex;"><span>$containerCheck = Get-AzStorageContainer -name $containerName -Context (Get-AzStorageAccount -ResourceGroupName $storageRgName -Name $storageAccountName).Context -ErrorAction SilentlyContinue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($null <span style="color:#f92672">-eq</span> $containerCheck)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    New-AzStorageContainer -name $containerName -Context (Get-AzStorageAccount -ResourceGroupName $storageRgName -Name $storageAccountName).Context
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Storage container created: </span>$containerName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;Container already exists&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/15-automated-create-storage-container.jpg"
+    alt="create-storage-container">
+</figure>
+
+<h2 id="upload-domain-controller-certificates">Upload domain controller certificates</h2>
+<p>The next step is to upload the domain controller certificates from the temporary folder where they were extracted to into the newly created <strong>ldaps-blog-post</strong> container in the <strong>avsgwcsa14a2c2db</strong> storage account we created.
+The following content is also divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
+<h3 id="manual-deployment-2">Manual deployment</h3>
+<p>As the first step, it is needed to &ldquo;enter&rdquo; the <strong>ldaps-blog-post</strong> container in the storage account:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/16-manual-upload-certs-1.jpg"
+    alt="start-of-cert-upload-process">
+</figure>
+
+<ol>
+<li>In the Azure Portal, navigate to the <strong>avsgwcsa14a2c2db</strong> storage account created earlier and select &ldquo;Containers&rdquo;;</li>
+<li>Click the <strong>ldaps-blog-post</strong> container.</li>
+</ol>
+<p>We will now upload the certificates into the container:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/17-manual-upload-certs-2.jpg"
+    alt="start-of-cert-upload-process-1">
+</figure>
+
+<ol>
+<li>In the <strong>ldaps-blog-post</strong> container, select &ldquo;Overview&rdquo;;</li>
+<li>In the top navigation, click &ldquo;⬆️ Upload&rdquo;;</li>
+<li>In the &ldquo;Upload blob&rdquo; panel, click the folder icon to select the certificates from your local hard drive.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/18-manual-upload-certs-3.jpg"
+    alt="start-of-cert-upload-process-3">
+</figure>
+
+<p>Navigate to the folder where the certificates have been extracted to (in our scenario c:\certTemp) and:</p>
+<ol>
+<li>Select all the certificates;</li>
+<li>Click &ldquo;Open&rdquo;.</li>
+</ol>
+<p>The &ldquo;Open&rdquo; screen will close and return to the Azure Portal &ldquo;Upload blob&rdquo; panel again, click &ldquo;Upload&rdquo; at the bottom of the screen:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/19-manual-upload-certs-4.jpg"
+    alt="upload-certs-4" height="300">
+</figure>
+
+<p>The certificates will now be uploaded into the blob container. The process is complete when green checkmarks are shown for each certificate uploaded:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/20-manual-upload-certs-complete.jpg"
+    alt="upload-certs-complete" height="300">
+</figure>
+
+<h3 id="automated-deployment-2">Automated deployment</h3>
+<p>With these commands, we will upload the actual certificates into the previously created container. In this example we are using &ldquo;<strong>ldaps-blog-post</strong>&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## upload certs to container</span>
+</span></span><span style="display:flex;"><span>$certs = Get-ChildItem -Path $exportFolder -Filter *.cer
+</span></span><span style="display:flex;"><span>$storageContext = (Get-AzStorageAccount -Name $storageAccountName -ResourceGroupName $storageRgName).Context
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($item <span style="color:#66d9ef">in</span> $certs)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $localFilePath = $item.FullName
+</span></span><span style="display:flex;"><span>    $azureFileName = $localFilePath.Split(<span style="color:#e6db74">&#39;\&#39;</span>)[$localFilePath.Split(<span style="color:#e6db74">&#39;\&#39;</span>).count-<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    Get-AzStorageAccount -Name $storageAccountName -ResourceGroupName $storageRgName | Get-AzStorageContainer -Name $containerName | Set-AzStorageBlobContent <span style="color:#f92672">-File</span> $localFilePath -Blob $azureFileName
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/21-automated-upload-certs-1.jpg"
+    alt="scripted-cert-upload-1">
+</figure>
+
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/22-automated-upload-certs-2.jpg"
+    alt="scripted-cert-upload-2">
+</figure>
+
+<h2 id="generate-sas-tokens-for-domain-controller-certificates">Generate SAS tokens for domain controller certificates</h2>
+<p>As part of this step we will generate &ldquo;shared access tokens&rdquo; for all the certificates uploaded into the blob container so they can be accessed through the run-command for implementing the LDAPS integration for vCenter.
+One section describes how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
+<h3 id="manual-deployment-3">Manual deployment</h3>
+<p>The manual deployment continues within the same blade in the Azure Portal where the previous step left off.
+For each of the uploaded certificates, generate a &ldquo;<strong>SAS token</strong>&rdquo;:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/23-manual-generate-sas-1.jpg"
+    alt="sas-process-1" height="300">
+</figure>
+
+<p>For each certificate separately:</p>
+<ol>
+<li>Select the checkbox in front of the container;</li>
+<li>Click the ellipsis at the end of the line;</li>
+<li>Select &ldquo;Generate SAS&rdquo;.</li>
+</ol>
+<p>In the following screen:</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/24-manual-generate-sas-2.jpg"
+    alt="sas-process-2" height="300">
+</figure>
+
+<ol>
+<li>Make sure to select a proper validity period for the SAS token. By default the SAS token will be valid for 8 hours which should be sufficient when performing the configuration in a continuous effort;</li>
+<li>Click &ldquo;Generate SAS token and URL&rdquo;.
+After clicking &ldquo;Generate SAS token and URL&rdquo; an additional section will be displayed at the bottom of the screen:</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/25-manual-generate-sas-complete.jpg"
+    alt="sas-process-complete" height="300">
+</figure>
+
+<p>Be sure to copy the &ldquo;Blob SAS URL&rdquo; generated for each separate certificate into a text-file temporarily as they will need to be concatenated into a single string <strong>separated by a comma</strong> for use during the execution of the run-command as explained in step &ldquo;Execute Run-Command&rdquo;.</p>
+<h3 id="automated-deployment-3">Automated deployment</h3>
+<p>With these commands, we will generate the SAS Token needed for the next steps, please note down <strong>BOTH</strong> tokens. In this script, the tokens are valid for <strong>24 hours</strong> and can be modified to suit your needs.</p>
+<p><strong>Notes</strong><br>
+<em><strong>$containerName</strong></em> will need to be updated</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">## create SAS token</span>
+</span></span><span style="display:flex;"><span>$containerName = <span style="color:#e6db74">&#34;ldaps-blog-post&#34;</span>
+</span></span><span style="display:flex;"><span>$blobs = Get-AzStorageBlob -Container $containerName -Context $storageContext | Where-Object {$_.name <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;.cer&#34;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($blob <span style="color:#66d9ef">in</span> $blobs)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $StartTime = Get-Date
+</span></span><span style="display:flex;"><span>    $EndTime = $startTime.AddHours(<span style="color:#ae81ff">24.0</span>)
+</span></span><span style="display:flex;"><span>    $sasToken = New-AzStorageBlobSASToken -Container $containerName -Blob $blob.name -Permission rwd -StartTime $StartTime -ExpiryTime $EndTime -Context $storageContext -FullUri
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#$sasToken</span>
+</span></span><span style="display:flex;"><span>    write-host <span style="color:#e6db74">&#34;SASToken created: </span>$sasToken<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/26-automated-sas-token-creation.jpg"
+    alt="scripted=sas-token-creation">
+</figure>
+
+<p><a href="https://github.com/fskelly/flkelly-cloudblog/blob/main/content/post/2023/avs-ldaps-configure-part1/snippets.ps1">snippets.ps1 file (all code commands)</a><br>
+<a href="../avs-ldaps-configure-part2/">&lt; Previous</a> <a href="../avs-ldaps-configure-part4/">Next&gt;</a></p>
+
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

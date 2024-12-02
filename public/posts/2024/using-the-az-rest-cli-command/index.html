@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/posts/2024/using-the-az-rest-cli-command/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Using the AZ Rest CLI command" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2024/using-the-az-rest-cli-command/" /><meta property="article:published_time" content="2024-08-29T16:00:56+00:00" />
+
+
+
+<meta name="twitter:title" content="Using the AZ Rest CLI command"/>
+<meta name="twitter:description" content="What are we doing?
+With this post I am going to show you how you can easily do Azure API calls and “skip” a lot of the difficult items. I have been on something interesting tools to help my customers, when I can talk more about it, I will. As part of this tooling exercise, the Azure REST API is used extensively. With “normal” applications like APIDog, ThunderClient and the like, you often need to get a token and then add this to the header as an auth object and this involves configuration on EntraID and the like. This is not necessarily the best approach for what I was looking for. I was looking for a quick testing framework for Azure REST API calls and then look at the output to be further extracted / manipulated with JQ."/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/posts'>posts</a>/<a href='http://localhost:1313/posts/2024'>2024</a>/<a href='http://localhost:1313/posts/2024/using-the-az-rest-cli-command'>using-the-az-rest-cli-command</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Using the AZ Rest CLI command</h1>
+
+Aug. 29, 2024
+
+
+<br/><br/>
+<p>What are we doing?</p>
+<p>With this post I am going to show you how you can easily do Azure API calls and “skip” a lot of the difficult items. I have been on something interesting tools to help my customers, when I can talk more about it, I will. As part of this tooling exercise, the Azure REST API is used extensively. With “normal” applications like APIDog, ThunderClient and the like, you often need to get a token and then add this to the header as an auth object and this involves configuration on EntraID and the like. This is not necessarily the best approach for what I was looking for. I was looking for a quick testing framework for Azure REST API calls and then look at the output to be further extracted / manipulated with JQ.</p>
+<p>These are the principal / considerations</p>
+<ol>
+<li>This is NOT designed to replace a full API solution like APIDog or Postman or ThunderClient</li>
+<li>Designed for quick queries against the Azure REST API</li>
+<li>Uses the currently logged on person credentials to run queries</li>
+</ol>
+<p>Ok, so down to business, the tool/command that I am using is “az rest”. Using this tool is quite easy but thanks to some additional insights from a colleague in my team you can make it even easier. So, how do we use the command. Let’s say we wanted to make the following request – Virtual Machines – List.</p>
+<p>The command looks like this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>GET https://management.azure.com/subscriptions/<span style="color:#f92672">{</span>subscriptionId<span style="color:#f92672">}</span>/resourceGroups/<span style="color:#f92672">{</span>resourceGroupName<span style="color:#f92672">}</span>/providers/Microsoft.Compute/virtualMachines?api-version<span style="color:#f92672">=</span>2024-07-01
+</span></span></code></pre></div><p>We need to provide some variable(s) or information as marked by items in braces (“{}”), so we need to provide <strong>&ldquo;subscriptionId&rdquo;</strong> and <strong>&ldquo;resourceGroupName&rdquo;</strong>. I will endeavour to provide as much information as possible, however for safety reason, some items will be obfuscated.</p>
+<p><strong>Please remember to login first az login, as the az rest command uses the context of the currently authenticated to Azure user, hence no auth tokens.</strong></p>
+<p>Here is a quick shell script to show this and allow you to test.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set your variables here</span>
+</span></span><span style="display:flex;"><span>subscriptionId<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;your_subscription_id&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>resourceGroupName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;your_resource_group_name&gt;&#34;</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Construct the URL</span>
+</span></span><span style="display:flex;"><span>url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://management.azure.com/subscriptions/</span><span style="color:#e6db74">${</span>subscriptionId<span style="color:#e6db74">}</span><span style="color:#e6db74">/resourceGroups/</span><span style="color:#e6db74">${</span>resourceGroupName<span style="color:#e6db74">}</span><span style="color:#e6db74">/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&#34;</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use az rest command</span>
+</span></span><span style="display:flex;"><span>az rest --method get --url $url
+</span></span></code></pre></div><p>You will get a result similar to the below,</p>
+<figure><img src="/images/blogImages/2024/using-az-rest-cli-command/result1.png"
+    alt="az rest result">
+</figure>
+
+<p>For me and the testing I am doing, this is a great, rapid and repeatable way of testing queries and quickly testing if the URI is valid before spending many hours troubleshooting the <strong>&ldquo;why is this not working&rdquo;</strong> versus <strong>&ldquo;is my URI correct&rdquo;</strong>.</p>
+<p>What is also quite handy is the fact that the <strong>&ldquo;<a href="https://management.azure.com">https://management.azure.com</a>&rdquo;</strong> aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example</p>
+<figure><img src="/images/blogImages/2024/using-az-rest-cli-command/result2.png"
+    alt="az rest result2">
+</figure>
+
+<p>Without the API Version appended</p>
+<figure><img src="/images/blogImages/2024/using-az-rest-cli-command/failure.png"
+    alt="failure">
+</figure>
+
+<p>With the correct API version appended 👍</p>
+<figure><img src="/images/blogImages/2024/using-az-rest-cli-command/image-4.png"
+    alt="failure">
+</figure>
+
+<figure><img src="/images/blogImages/2024/using-az-rest-cli-command/image-5.png"
+    alt="failure">
+</figure>
+
+<p>You can now do the same process with other IDs that are returned.</p>
+
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

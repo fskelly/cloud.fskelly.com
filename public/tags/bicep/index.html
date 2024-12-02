@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/tags/bicep/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       
+      <link href="http://localhost:1313/tags/bicep/index.xml" rel="alternate" type="application/rss+xml" title="fletchers-cloud-blog" />
+    <meta property="og:title" content="Bicep" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/tags/bicep/" />
+
+
+<meta name="twitter:title" content="Bicep"/>
+<meta name="twitter:description" content=""/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/tags'>tags</a>/<a href='http://localhost:1313/tags/bicep'>bicep</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Bicep</h1>
+<br/>
+
+
+<div class="posts-list">
+
+    
+        <div class="post">
+            <p>
+                <div class="date">Jun. 20, 2022</div>    
+                <h1><a href="http://localhost:1313/posts/2022/bicep-linux-vm-ssh-keys/" title="Using SSH Keys with Bicep based Linux VM templates">Using SSH Keys with Bicep based Linux VM templates</a></h1>
+                <p>I this post, I use bicep files for the deployment of Linux VMs AND I add some magic with PowerSehll to allow for the creation or using of existing SSH keys with these VMs.</p>
+<p>I am a HUGE fan of SSH keys with Linux VMs for obvious reasons. I could just not find a script or scenario that covered this topic in a way that I actually like. I like to show more details and explain.</p>
+            </p>
+        </div>
+    
+
+    
+        <div class="post">
+            <p>
+                <div class="date">Jul. 2, 2021</div>    
+                <h1><a href="http://localhost:1313/posts/2021/bicep-troubleshooting/" title="Bicep Troubleshooting">Bicep Troubleshooting</a></h1>
+                <h1 id="some-basic-troubleshooting-with-azure-bicephttpsdocsmicrosoftcomen-usazureazure-resource-managerbicepoverview">Some basic &ldquo;troubleshooting&rdquo; with <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview">Azure Bicep</a></h1>
+<p>So, let me start with this. The team and the community behind Azure Bicep are amazing. There are some great examples <a href="https://github.com/Azure/bicep">here</a>. I often use these as a base and the rip apart or add to meet my needs, you do <strong>NOT</strong> need to start from ground zero. :smile:</p>
+<p>When you are deploying bicep templates you command will look something like this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$bicepFile = <span style="color:#e6db74">&#34;.\main.bicep&#34;</span>
+</span></span><span style="display:flex;"><span>New-AzResourceGroupDeployment -ResourceGroupName &lt;resourceGroupName&gt; -TemplateFile &lt;bicepFilePath&gt; -name &lt;deploymentname&gt;
+</span></span></code></pre></div><p>I love to use repeatable code, so mine has more variables and would look like this.</p>
+            </p>
+        </div>
+    
+
+</div>
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

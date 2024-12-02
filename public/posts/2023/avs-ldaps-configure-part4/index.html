@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fletchers-cloud-blog/posts/2023/avs-ldaps-configure-part4/</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/terminal-0.7.4.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/animate-4.1.1.min.css">
+    <link rel="stylesheet" href="http://localhost:1313/hugo-theme-console/css/console.css">
+    
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+       <meta property="og:title" content="Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 4" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2023/avs-ldaps-configure-part4/" /><meta property="article:published_time" content="2023-01-25T08:45:43+00:00" />
+
+
+
+<meta name="twitter:title" content="Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 4"/>
+<meta name="twitter:description" content="Author(s): Robin Heringa and Fletcher Kelly
+Implementing LDAPS identity integration with Azure VMware Solution series - 4 of 4
+This is the fourth and final part of the blog series on how to implement LDAPS identity integration with Azure VMware Solution. Other parts of this series can be found here:
+
+LDAPS integration - part 1 of 4
+LDAPS integration - part 2 of 4
+LDAPS integration - part 3 of 4
+
+These steps, for now, are run manually from the Azure Portal. This will be found &ldquo;Azure VMware Solution&rdquo; and under Operations, Run command. Then select &ldquo;New-LDAPSIdentitySource&rdquo;. An automated way of executing the run-command is in the making. Please check back soon as this article will be updated as soon as this is available.
+Navigate to Azure Portal and ensure you are on AVS Private Cloud blade"/>
+
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt">
+              
+              
+              <a href="http://localhost:1313/" class="no-style site-name">fletchers-cloud-blog</a>:~# 
+              <a href='http://localhost:1313/posts'>posts</a>/<a href='http://localhost:1313/posts/2023'>2023</a>/<a href='http://localhost:1313/posts/2023/avs-ldaps-configure-part4'>avs-ldaps-configure-part4</a>/</div></header>
+          <nav class="terminal-menu">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                <li><a href="http://localhost:1313/about/" typeof="ListItem">about/</a></li>
+                
+                <li><a href="http://localhost:1313/posts/" typeof="ListItem">posts/</a></li>
+                
+            </ul>
+          </nav>
+        </div>
+    </div>
+
+    <div class="container animated zoomIn fast" >
+        
+<h1>Azure VMware Solution: A comprehensive guide to LDAPS identity integration - Part 4</h1>
+
+Jan. 25, 2023
+
+
+<br/><br/>
+<p>Author(s): <a href="/about/robinheringa/">Robin Heringa</a> and <a href="/about/fletcherkelly/">Fletcher Kelly</a></p>
+<h1 id="implementing-ldaps-identity-integration-with-azure-vmware-solution-series---4-of-4">Implementing LDAPS identity integration with Azure VMware Solution series - 4 of 4</h1>
+<p>This is the fourth and final part of the blog series on how to implement LDAPS identity integration with Azure VMware Solution. Other parts of this series can be found here:</p>
+<ol>
+<li><a href="../avs-ldaps-configure-part1/">LDAPS integration - part 1 of 4</a></li>
+<li><a href="../avs-ldaps-configure-part2/">LDAPS integration - part 2 of 4</a></li>
+<li><a href="../avs-ldaps-configure-part3/">LDAPS integration - part 3 of 4</a></li>
+</ol>
+<p>These steps, for now, are run manually from the Azure Portal. This will be found &ldquo;Azure VMware Solution&rdquo; and under Operations, Run command. Then select &ldquo;New-LDAPSIdentitySource&rdquo;. An automated way of executing the run-command is in the making. Please check back soon as this article will be updated as soon as this is available.
+Navigate to Azure Portal and ensure you are on AVS Private Cloud blade</p>
+<ol>
+<li>In the AVS Private Cloud blade, click &ldquo;Run Command&rdquo;;</li>
+<li>Ensure Packages is selected.</li>
+<li>Click &ldquo;New-LDAPSIdentitySource&rdquo;.</li>
+<li>Ensure the correct Run is open before populating the required information.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/1-run-command-1.jpg"
+    alt="run-command-pane">
+</figure>
+
+<p>Populate the information as needed.</p>
+<p>The SSLCertificateSasUrl is a single string consisting of the SASTokens separated with a &ldquo;<strong>,</strong>&rdquo;. For example:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">https</span>:<span style="color:#75715e">//avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc001.cer?sv=2021-10-04&amp;st=2023-01-12T13%3A46%3A45Z&amp;se=2023-01-13T13%3A46%3A45Z&amp;sr=b&amp;sp=rwd&amp;[Removed],https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc002.cer?sv=2021-10-04&amp;st=2023-01-12T13%3A46%3A45Z&amp;se=2023-01-13T13%3A46%3A45Z&amp;sr=b&amp;sp=rwd&amp;[Removed] 
+</span></span></span></code></pre></div> and <strong>pasted as a single long string</strong>.</p>
+<p><strong>Example string:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc001.cer?sv<span style="color:#f92672">=</span>2021-10-04&amp;st<span style="color:#f92672">=</span>2023-01-12T13%3A46%3A45Z&amp;se<span style="color:#f92672">=</span>2023-01-13T13%3A46%3A45Z&amp;sr<span style="color:#f92672">=</span>b&amp;sp<span style="color:#f92672">=</span>rwd&amp;<span style="color:#f92672">[</span>Removed<span style="color:#f92672">]</span>,https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc002.cer?sv<span style="color:#f92672">=</span>2021-10-04&amp;st<span style="color:#f92672">=</span>2023-01-12T13%3A46%3A45Z&amp;se<span style="color:#f92672">=</span>2023-01-13T13%3A46%3A45Z&amp;sr<span style="color:#f92672">=</span>b&amp;sp<span style="color:#f92672">=</span>rwd&amp;<span style="color:#f92672">[</span>Removed<span style="color:#f92672">]</span></span></span></code></pre></div></p>
+<p>The other values would need to be updated as per your environment. The BaseDNGroups and BaseDNUsers are the <strong>D</strong>istinguished <strong>N</strong>ames  for the groups and users. These can be found using the ADSIedit tool and navigating to the required groups within Active Directory and noting down these values. More information can be here about <a href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ldap/distinguished-names">Distinguished Names</a></p>
+<p>With the BaseDNGroups and BaseDNUsers, watch the values used as these should be under the same tree. In this example, <strong>&ldquo;OU=Corp,DC=avsemea,DC=com&rdquo;</strong></p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/2-run-command-populated.jpg"
+    alt="run-command-pane" height="500">
+</figure>
+
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/3-run-command-run.jpg"
+    alt="run-command-execute" height="300">
+</figure>
+
+<p>Once all information is entered, Run the command. You can check the status of the Run command within the portal.
+Navigate to Azure Portal and ensure you are on AVS Private Cloud blade</p>
+<ol>
+<li>In the AVS Private Cloud blade, click &ldquo;Run Command&rdquo;;</li>
+<li>Ensure &ldquo;Run execution status&rdquo; is selected.</li>
+<li>Click the latest run execution that is applicable to your environment. In this case, <strong>New-LDAPSIdentitySource-Exec33</strong>.</li>
+<li>Ensure you click the Execution name (3.) that is the running state.</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/4-run-command-execution-status.jpg"
+    alt="run-command-execute-status" height="300">
+</figure>
+
+<p>You can check the status of the job now and you are waiting for all the tasks to be completed and show that your selected group was added to CloudAdmins
+Once you have clicked the Execution name link</p>
+<ol>
+<li>Check the information tab to see the steps being executed by the script;</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/5-run-command-execution-status-2.jpg"
+    alt="run-command-execute" height="300">
+</figure>
+
+<p>You can also check the output and ensure that the correct name was added.
+Once you have clicked the Execution name link</p>
+<ol>
+<li>Check the Output tab to see the steps being executed by the script;</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/6-run-command-execution-status-3.jpg"
+    alt="run-command-execute-1" height="300">
+</figure>
+
+<p>You can log on with LDAP based credentials. Using the link found under &ldquo;VMware credentials&rdquo;, navigate to vCenter Server Credentials Web client URL
+Navigate to Azure Portal and ensure you are on AVS Private Cloud blade</p>
+<ol>
+<li>In the AVS Private Cloud blade, click &ldquo;VMware credentials&rdquo;;</li>
+<li>Click the copy icon for the WebClient URL under &ldquo;vCenter Server credentials&rdquo;</li>
+</ol>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/7-vmware-creds.jpg"
+    alt="vmware-urls" height="300">
+</figure>
+
+<p>Navigate to the URL with your browser of choice and use your Directory Services based credentials to ensure that login and authentication is working as expected.</p>
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/8-vmware-external-creds-checking-1.jpg"
+    alt="ldaps vmware url logon 1" height="300">
+</figure>
+
+<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part4/9-vmware-external-creds-checking-2.jpg"
+    alt="ldaps vmware url logon 2">
+</figure>
+
+<p>Logon to Azure VMware Solution based components is now possible and should be now be working as expected.</p>
+<p><a href="https://github.com/fskelly/flkelly-cloudblog/blob/main/content/post/2023/avs-ldaps-configure-part1/snippets.ps1">snippets.ps1 file (all code commands)</a><br>
+<a href="../avs-ldaps-configure-part3/">&lt; Previous</a></p>
+
+
+
+        <div class="footer">
+    Powered by <a href="https://gohugo.io/">Hugo</a> with
+    <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>. 
+</div>
+
+    </div>
+  </body>
+</html>

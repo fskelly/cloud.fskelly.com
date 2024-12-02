@@ -1,0 +1,10 @@
+{{ define "main" }}
+<h1>Posts by Year</h1>
+<div class="years-list">
+    {{ range .Data.Terms.Alphabetical }}
+        <div class="year">
+            <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+        </div>
+    {{ end }}
+</div>
+{{ end }}
