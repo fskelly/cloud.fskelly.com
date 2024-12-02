@@ -2,7 +2,6 @@
 
 This is the backend for my Cloud based blog  
 [Fletcher's Cloud Blog](https://cloud.fskelly.com)
-https://swacloudblogflkelly.z1.web.core.windows.net/
 
 My build command
 
