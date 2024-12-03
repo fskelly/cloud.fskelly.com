@@ -6,21 +6,21 @@
     <description>Recent content in Abouts on fletchers-cloud-blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Mar 2022 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://example.com/about/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About Fletcher</title>
-      <link>https://example.com/about/fletcherkelly/</link>
-      <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://example.com/about/fletcherkelly/</guid>
-      <description>&lt;h2 id=&#34;who-am-i&#34;&gt;Who Am I?&lt;/h2&gt;&#xA;&lt;p&gt;I am a Microsoft Employee, working within Azure Engineering as a FastTrack For Azure (FTA) Engineer, focusing primarily on Infra and working with customers across the globe with their respective journeys to the cloud. I was previously a Cloud Solutions Architect (CSA) for Microsoft as well. I was in the Microsoft Partner space for many years before that.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-fasttrack-for-azure&#34;&gt;What is FastTrack For Azure?&lt;/h2&gt;&#xA;&lt;p&gt;FastTrack for Azure is a technical enablement program for organizations with cloud projects that enables the rapid, effective design, and deployment of Azure solutions in the cloud. It includes tailored guidance from Azure engineers that leverages proven practices and architectural guides.&lt;/p&gt;</description>
-    </item>
     <item>
       <title>About Robin Heringa</title>
       <link>https://example.com/about/robinheringa/</link>
       <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
       <guid>https://example.com/about/robinheringa/</guid>
       <description>&lt;p&gt;Robin Heringa is an engineer in the FastTrack for Azure team at Microsoft working directly with customers on Azure Infrastructure projects. Robin is passionate about all Azure infrastructure technologies with a focus on Azure Management &amp;amp; Security and Azure VMware Solution.&#xA;Robin has been with Microsoft for almost 15 years and working on IT Data Center &amp;amp; Cloud projects for 24 years.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About Fletcher</title>
+      <link>https://example.com/about/fletcherkelly/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/about/fletcherkelly/</guid>
+      <description>&lt;h2 id=&#34;who-am-i&#34;&gt;Who Am I?&lt;/h2&gt;&#xA;&lt;p&gt;I am a Microsoft Employee, working within Azure Engineering as Senior Software ENgineer with the AzRel (Azure Reliability) yeam, previously as a FastTrack For Azure (FTA) Engineer, focusing primarily on Infra and working with customers across the globe with their respective journeys to the cloud and before that I was previously a Cloud Solutions Architect (CSA) for Microsoft as well. I was in the Microsoft Partner space for many years before that.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
