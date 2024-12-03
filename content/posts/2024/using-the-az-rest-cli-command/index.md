@@ -46,22 +46,23 @@ az rest --method get --url $url
 
 You will get a result similar to the below,
 
-{{< figure src="/images/blogImages/2024/using-az-rest-cli-command/result1.png" alt="az rest result" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/result1.png" alt="az rest result" >}}
+<!-- {{< figure src="/images/blogImages/2024/using-az-rest-cli-command/result1.png" alt="az rest result" >}} -->
 
 For me and the testing I am doing, this is a great, rapid and repeatable way of testing queries and quickly testing if the URI is valid before spending many hours troubleshooting the **"why is this not working"** versus **"is my URI correct"**.
 
 What is also quite handy is the fact that the **"https://management.azure.com"** aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example
 
-{{< figure src="/images/blogImages/2024/using-az-rest-cli-command/result2.png" alt="az rest result2" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/result2.png" alt="az rest result2" >}}
 
 Without the API Version appended
 
-{{< figure src="/images/blogImages/2024/using-az-rest-cli-command/failure.png" alt="failure" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/failure.png" alt="failure" >}}
 
 With the correct API version appended 👍
 
-{{< figure src="/images/blogImages/2024/using-az-rest-cli-command/image-4.png" alt="failure" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/image-4.png" alt="failure" >}}
 
-{{< figure src="/images/blogImages/2024/using-az-rest-cli-command/image-5.png" alt="failure" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/image-5.png" alt="failure" >}}
 
 You can now do the same process with other IDs that are returned.
