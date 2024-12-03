@@ -16,19 +16,16 @@ My folder structure looks like this
 
 ```bash
 content  
-|---post
+|---posts
     |---year
         |---postTitle
             |---index.md
 ```
 
 ```bash
-hugo new post/{{year}}/{{postTitle}}/index.md
+hugo new posts/{{year}}/{{postTitle}}/index.md
 ```
 
-```bash
-hugo new post/{{year}}/{{postTitle}}.md
-```
 
 ![blog](https://img.shields.io/website-up-down-green-red/https/cloud.fskelly.com.svg)  
 [![Deploy To Azure](https://github.com/fskelly/flkelly-cloudblog/actions/workflows/deploy-hugo-storage-account-copy.yml/badge.svg)](https://github.com/fskelly/flkelly-cloudblog/actions/workflows/deploy-hugo-storage-account-copy.yml)
