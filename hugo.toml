@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://cloud.fskelly.com/"
 title = "fletchers-cloud-blog"
 theme = "hugo-theme-console"
 languageCode = "en-us"
