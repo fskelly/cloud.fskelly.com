@@ -85,7 +85,7 @@ foreach ($computer in $remoteComputers)
 
 You can see the exported files in the picture below.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet1.jpg" alt="code-snippet-1" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet1.jpg" alt="code-snippet-1" >}}
 
 ## 3. Create a storage account
 
@@ -119,7 +119,7 @@ if ($null -eq $saCheck)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet2.jpg" alt="code-snippet-2" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet2.jpg" alt="code-snippet-2" >}}
 
 ## 4. Create a container
 
@@ -139,7 +139,7 @@ if ($null -eq $containerCheck)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet3.jpg" alt="code-snippet-3" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet3.jpg" alt="code-snippet-3" >}}
 
 ## 5. Upload certificates to container
 
@@ -155,7 +155,7 @@ foreach ($item in $certs)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet5.jpg" alt="code-snippet-5" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet5.jpg" alt="code-snippet-5" >}}
 
 ## 6. Create the SAS Tokens
 
@@ -176,7 +176,7 @@ foreach ($blob in $blobs)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet5.jpg" alt="code-snippet-5" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet5.jpg" alt="code-snippet-5" >}}
 
 SASToken created: https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc001.cer?sv=2021-10-04&st=2023-01-12T13%3A46%3A45Z&se=2023-01-13T13%3A46%3A45Z&sr=b&sp=rwd&[Removed]  
 SASToken created: https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc002.cer?sv=2021-10-04&st=2023-01-12T13%3A46%3A45Z&se=2023-01-13T13%3A46%3A45Z&sr=b&sp=rwd&[Removed] 
@@ -186,31 +186,31 @@ SASToken created: https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post
 
 These steps, for now, are run manually from the [Azure Portal](https://portal.azure.com). This will be found "Azure VMware Solution" and under Operations, **Run command**. Then select **"New-LDAPSIdentitySource"**
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet7.jpg" alt="code-snippet-7" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet7.jpg" alt="code-snippet-7" >}}  
 
 Populate the information as needed.  
 **Note: the SSLCertificateSasUrl is a single string consisting of the SASTokens separated with a “,”. For example, https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc001.cer?sv=2021-10-04&st=2023-01-12T13%3A46%3A45Z&se=2023-01-13T13%3A46%3A45Z&sr=b&sp=rwd&[Removed], https://avsgwcsa14a2c2da.blob.core.windows.net/ldaps-blog-post/avs-gwc-dc002.cer?sv=2021-10-04&st=2023-01-12T13%3A46%3A45Z&se=2023-01-13T13%3A46%3A45Z&sr=b&sp=rwd&[Removed] and pasted as a single long string.**
 The other values would need to be updated as per your environment.  
 **Note: With the BaseDNGroups and BaseDNUsers, watch the values used as these should be under the same tree, in this example, “OU=Corp,DC=avsemea,DC=com”**
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet8.jpg" alt="code-snippet-8" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet8.jpg" alt="code-snippet-8" >}}  
 
 Once all information is entered, Run the command.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet9.jpg" alt="code-snippet-9" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet9.jpg" alt="code-snippet-9" >}}  
 
 You can check the status of the **Run command** within the portal, under Operations, **Run command**, then select **Run execution status** and then select the correct job.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet10.jpg" alt="code-snippet-10" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet10.jpg" alt="code-snippet-10" >}}  
 
 You can check the status of the job now and you are waiting for all the tasks to be completed and show that your selected group was added to **CloudAdmins**
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet11.jpg" alt="code-snippet-11" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet11.jpg" alt="code-snippet-11" >}}  
 
 You can also check the output and ensure that the correct name was added.  
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet12.jpg" alt="code-snippet-12" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet12.jpg" alt="code-snippet-12" >}}  
 
 You can logon with LDAP based credentials.
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet13.jpg" alt="code-snippet-13" >}} 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure/snippet14.jpg" alt="code-snippet-14" >}} 
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet13.jpg" alt="code-snippet-13" >}} 
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure/snippet14.jpg" alt="code-snippet-14" >}} 
