@@ -64,12 +64,12 @@ May. 19, 2023
 <h2 id="lets-build-this">Lets build this</h2>
 <p>If you have been following along and you have used our previous article(s) - <a href="https://cloud.fskelly.com/post/2023/avs-ldaps-configure-part1/">AZURE VMWARE SOLUTION: A COMPREHENSIVE GUIDE TO LDAPS IDENTITY INTEGRATION - PART 1</a> - you would have realized that this quite a process. We took our many customers feedback to our Product Group (PG) within <a href="https://www.microsoft.com">Microsoft</a> and we have worked with them, to create a new version of the &ldquo;Run-Command&rdquo; and this has been released publicly.</p>
 <p>You are looking for the &ldquo;5.3.54&rdquo; version of the run commands and &ldquo;New-LDAPSIdentitySource&rdquo;</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-version.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-version.png"
     alt="new version of the tools">
 </figure>
 
 <p>You will notice that the &ldquo;SSLCertificateSasUrl&rdquo; field is now <strong>OPTIONAL</strong>. The &ldquo;i&rdquo; information bubble will now explain how it works. Basically the service now looks for the Domain Controllers based upon the information you provide and now connects and attempts to download the certificates automatically. Provided you have the pre-requisites in place, Like a Certificate Authority (CA), this works really well and speeds up the process tremendously and removes lot of complexity like dealing with Stroage Accounts, uploading the certificates and creating the required SAS Tokens.</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-new-1.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-new-1.png"
     alt="information block explaining the new process">
 </figure>
 

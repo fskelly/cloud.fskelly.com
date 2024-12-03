@@ -38,10 +38,10 @@ After locally or remotely opening the computer certificate store:
 1. Check if the store contains certificates with the "Server Authentication" intended purpose.
 
 Available certificates for **avs-gwc-dc001.avsemea.com**:
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/1-avs-gwc-dc001-certificates.jpg" alt="avs-gwc-dc001-certificates mmc" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/1-avs-gwc-dc001-certificates.jpg" alt="avs-gwc-dc001-certificates mmc" >}}
 
 Available certificates for **avs-gwc-dc002.avsemea.com**:
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/2-avs-gwc-dc002-certificates.jpg" alt="avs-gwc-dc002-certificates mmc" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/2-avs-gwc-dc002-certificates.jpg" alt="avs-gwc-dc002-certificates mmc" >}}
 
 Next we need to verify whether the Active Directory domain controllers are configured to offer LDAPS services:  
 
@@ -50,10 +50,10 @@ Next we need to verify whether the Active Directory domain controllers are confi
 1. Verify that there is an active listener for TCP port 636.
 
 LDAPS listener for **avs-gwc-dc001.avsemea.com**:
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/3-avs-gwc-dc001-netstat.jpg" alt="avs-gwc-dc001-netstat-results" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/3-avs-gwc-dc001-netstat.jpg" alt="avs-gwc-dc001-netstat-results" >}}
 
 LDAPS listener for **avs-gwc-dc002.avsemea.com**:
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/4-avs-gwc-dc002-netstat.jpg" alt="avs-gwc-dc002-netstat-results" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/4-avs-gwc-dc002-netstat.jpg" alt="avs-gwc-dc002-netstat-results" >}}
 
 ## Extract (correct) domain controller certificates
 
@@ -87,13 +87,13 @@ foreach ($computer in $remoteComputers)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/5-powershell-cert-extract.jpg" alt="PowerShell-using-openssl-to-extract-certs" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/5-powershell-cert-extract.jpg" alt="PowerShell-using-openssl-to-extract-certs" >}}
 
 ## Validate domain controller certificate requirements
 
 The next step is to ensure that the certificate extraction was performed successfully. This will always be a manual step in the process.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/6-certificate-properties.jpg" alt="Exported-certificate-properties" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/6-certificate-properties.jpg" alt="Exported-certificate-properties" >}}
 
 As displayed in the image above:
 
@@ -107,7 +107,7 @@ For each of the certificates:
 5. Verify that domain controller fully qualified domain name FQDN) is present in the "Issued to" field. In our scenario: **avs-gwc-dc001.avsemea.com** and **avs-gwc-dc002.avsemea.com**.
 6. Verify that the certificate is still valid by checking the "Valid from" field.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/7-certificate-certification-path.jpg" alt="Certification-path-of-the-certificate" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/7-certificate-certification-path.jpg" alt="Certification-path-of-the-certificate" >}}
 
 To complete the certificate verification process, for each certificate:
 
@@ -123,14 +123,14 @@ The following content is divided into two sub-sections. One section will describ
 
 As part of this manual process a storage account will be created that is used to store the domain controller certificates for later use by the "New-LDAPSIdentitySource" run-command.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/8-manual-storage-account-create.jpg" alt="create-storage-account-from-portal" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/8-manual-storage-account-create.jpg" alt="create-storage-account-from-portal" >}}
 
 In the Azure Portal:
 
 1. Click on "Storage accounts" in the left navigation panel;
 1. Click "+ Create" at the top to create a new storage account. The "Create a storage account" blade will now be displayed.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/9-manual-storage-account-create-2.jpg" alt="create-storage-account-from-portal-storage-account-information" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/9-manual-storage-account-create-2.jpg" alt="create-storage-account-from-portal-storage-account-information" >}}
 
 On the "basics" tab:
 
@@ -140,7 +140,7 @@ On the "basics" tab:
 1. In the "Region" drop-down menu be sure to select the same region as where Azure VMware Solution is deployed. In our scenario **Germany West Central**.
 1. As this storage account has no need for changing any of the default settings, click "Review" at the bottom of the screen.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/10-manual-storage-account-review.jpg" alt="create-storage-account-from-portal-storage-account-review" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/10-manual-storage-account-review.jpg" alt="create-storage-account-from-portal-storage-account-review" >}}
 
 On the review screen:
 
@@ -148,7 +148,7 @@ On the review screen:
 1. Click "Create".
 After a few minutes the creation of the storage account should be completed:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/11-manual-storage-account-review-2.jpg" alt="create-storage-account-from-portal-storage-account-review-complete" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/11-manual-storage-account-review-2.jpg" alt="create-storage-account-from-portal-storage-account-review-complete" >}}  
 
 ### Automated deployment
 
@@ -194,7 +194,7 @@ if ($null -eq $saCheck)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/12-automated-create-storage-account.jpg" alt="scripted-creation-of-storage-account" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/12-automated-create-storage-account.jpg" alt="scripted-creation-of-storage-account" >}}  
 
 ## Create Storage Blob container
 
@@ -203,7 +203,7 @@ The following content is divided into two sub-sections. One section will describ
 
 ### Manual deployment
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/13-manual-create-container.jpg" alt="create-storage-container" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/13-manual-create-container.jpg" alt="create-storage-container" >}}  
 
 In the Azure Portal:
 
@@ -240,7 +240,7 @@ if ($null -eq $containerCheck)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/15-automated-create-storage-container.jpg" alt="create-storage-container" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/15-automated-create-storage-container.jpg" alt="create-storage-container" >}}  
 
 ## Upload domain controller certificates
 
@@ -251,20 +251,20 @@ The following content is also divided into two sub-sections. One section will de
 
 As the first step, it is needed to "enter" the **ldaps-blog-post** container in the storage account:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/16-manual-upload-certs-1.jpg" alt="start-of-cert-upload-process" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/16-manual-upload-certs-1.jpg" alt="start-of-cert-upload-process" >}}  
 
 1. In the Azure Portal, navigate to the **avsgwcsa14a2c2db** storage account created earlier and select "Containers";
 1. Click the **ldaps-blog-post** container.
 
 We will now upload the certificates into the container:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/17-manual-upload-certs-2.jpg" alt="start-of-cert-upload-process-1" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/17-manual-upload-certs-2.jpg" alt="start-of-cert-upload-process-1" >}}  
 
 1. In the **ldaps-blog-post** container, select "Overview";
 1. In the top navigation, click "⬆️ Upload";
 1. In the "Upload blob" panel, click the folder icon to select the certificates from your local hard drive.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/18-manual-upload-certs-3.jpg" alt="start-of-cert-upload-process-3" >}}  
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/18-manual-upload-certs-3.jpg" alt="start-of-cert-upload-process-3" >}}  
 
 Navigate to the folder where the certificates have been extracted to (in our scenario c:\certTemp) and:
 
@@ -295,9 +295,9 @@ foreach ($item in $certs)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/21-automated-upload-certs-1.jpg" alt="scripted-cert-upload-1" >}} 
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/21-automated-upload-certs-1.jpg" alt="scripted-cert-upload-1" >}} 
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/22-automated-upload-certs-2.jpg" alt="scripted-cert-upload-2" >}} 
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/22-automated-upload-certs-2.jpg" alt="scripted-cert-upload-2" >}} 
 
 ## Generate SAS tokens for domain controller certificates
 
@@ -350,7 +350,7 @@ foreach ($blob in $blobs)
 }
 ```
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part3/26-automated-sas-token-creation.jpg" alt="scripted=sas-token-creation" >}} 
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/26-automated-sas-token-creation.jpg" alt="scripted=sas-token-creation" >}} 
 
 [snippets.ps1 file (all code commands)](https://github.com/fskelly/flkelly-cloudblog/blob/main/content/post/2023/avs-ldaps-configure-part1/snippets.ps1)  
 [< Previous](../avs-ldaps-configure-part2/) [Next>](../avs-ldaps-configure-part4/)

@@ -47,7 +47,7 @@ Now you can click, "Connect in browser". This will launch an [Azure Cloud Shell]
 ## GOTCHA
 
 You may hit your first error here.
-{{< figure src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-error-1.png" alt="Connect via portal to linux Azure Arc machine button - connection error" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-error-1.png" alt="Connect via portal to linux Azure Arc machine button - connection error" >}}
 
 The error may seem a little strange, it seems it is using port 66535 to dp a port lookup - like a proxy lookup - see [here](https://serverfault.com/questions/915724/connection-closed-by-unknown-port-65535-when-ssh-using-ad-creds-on-rhel-machine) as an example of this. It is still wanting to connect to port 22, the normal ssh port. _So how do we fix this?_
 
@@ -58,15 +58,15 @@ azcmagent config set incomingconnections.ports 22
 ```
 
 Run this command on your linux machine (sudo will be needed)
-{{< figure src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-fix1.png" alt="Update port number from azcmagent" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-fix1.png" alt="Update port number from azcmagent" >}}
 and then we can connect  
-{{< figure src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-connect-1.png" alt="Connect via portal to linux Azure Arc machine is successful" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-connect-1.png" alt="Connect via portal to linux Azure Arc machine is successful" >}}
 
 ### Windows VM
 {{< figure src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-windows-vm.png" alt="Connect via portal to Windows Azure Arc machine" height="300" width="900" >}}
 
 The steps for connection from the portal and the required **Az**ure **c**onnected **ma**chine **agent** commands are the same. However we do need to get SSH working on the Windows Server, this is actually quite easy and simply needs some copy and paste, see [here](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell). Once you have done that, your connection will work.
 
-{{< figure src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-windows-vm-connect-1.png" alt="Connect via portal to Windows Azure Arc machine is successful" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-windows-vm-connect-1.png" alt="Connect via portal to Windows Azure Arc machine is successful" >}}
 
 So there you have it, an SSH connection from the Azure portal to a Windows AND Linux Arc-enabled machine.

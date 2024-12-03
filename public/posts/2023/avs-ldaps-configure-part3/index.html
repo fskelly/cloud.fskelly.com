@@ -84,12 +84,12 @@ Jan. 25, 2023
 <li>Check if the store contains certificates with the &ldquo;Server Authentication&rdquo; intended purpose.</li>
 </ol>
 <p>Available certificates for <strong>avs-gwc-dc001.avsemea.com</strong>:
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/1-avs-gwc-dc001-certificates.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/1-avs-gwc-dc001-certificates.jpg"
     alt="avs-gwc-dc001-certificates mmc">
 </figure>
 </p>
 <p>Available certificates for <strong>avs-gwc-dc002.avsemea.com</strong>:
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/2-avs-gwc-dc002-certificates.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/2-avs-gwc-dc002-certificates.jpg"
     alt="avs-gwc-dc002-certificates mmc">
 </figure>
 </p>
@@ -100,12 +100,12 @@ Jan. 25, 2023
 <li>Verify that there is an active listener for TCP port 636.</li>
 </ol>
 <p>LDAPS listener for <strong>avs-gwc-dc001.avsemea.com</strong>:
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/3-avs-gwc-dc001-netstat.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/3-avs-gwc-dc001-netstat.jpg"
     alt="avs-gwc-dc001-netstat-results">
 </figure>
 </p>
 <p>LDAPS listener for <strong>avs-gwc-dc002.avsemea.com</strong>:
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/4-avs-gwc-dc002-netstat.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/4-avs-gwc-dc002-netstat.jpg"
     alt="avs-gwc-dc002-netstat-results">
 </figure>
 </p>
@@ -134,13 +134,13 @@ Jan. 25, 2023
 </span></span><span style="display:flex;"><span>    $exportPath = $exportFolder+($computer.split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>])+<span style="color:#e6db74">&#34;.cer&#34;</span>
 </span></span><span style="display:flex;"><span>    $cert.Value | Out-File $exportPath -Encoding ascii
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/5-powershell-cert-extract.jpg"
+</span></span></code></pre></div><figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/5-powershell-cert-extract.jpg"
     alt="PowerShell-using-openssl-to-extract-certs">
 </figure>
 
 <h2 id="validate-domain-controller-certificate-requirements">Validate domain controller certificate requirements</h2>
 <p>The next step is to ensure that the certificate extraction was performed successfully. This will always be a manual step in the process.</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/6-certificate-properties.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/6-certificate-properties.jpg"
     alt="Exported-certificate-properties">
 </figure>
 
@@ -156,7 +156,7 @@ Jan. 25, 2023
 <li>Verify that domain controller fully qualified domain name FQDN) is present in the &ldquo;Issued to&rdquo; field. In our scenario: <strong>avs-gwc-dc001.avsemea.com</strong> and <strong>avs-gwc-dc002.avsemea.com</strong>.</li>
 <li>Verify that the certificate is still valid by checking the &ldquo;Valid from&rdquo; field.</li>
 </ol>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/7-certificate-certification-path.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/7-certificate-certification-path.jpg"
     alt="Certification-path-of-the-certificate">
 </figure>
 
@@ -170,7 +170,7 @@ In our scenario the field contains the name of the root certification authority 
 <p>The following content is divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
 <h3 id="manual-deployment">Manual deployment</h3>
 <p>As part of this manual process a storage account will be created that is used to store the domain controller certificates for later use by the &ldquo;New-LDAPSIdentitySource&rdquo; run-command.</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/8-manual-storage-account-create.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/8-manual-storage-account-create.jpg"
     alt="create-storage-account-from-portal">
 </figure>
 
@@ -179,7 +179,7 @@ In our scenario the field contains the name of the root certification authority 
 <li>Click on &ldquo;Storage accounts&rdquo; in the left navigation panel;</li>
 <li>Click &ldquo;+ Create&rdquo; at the top to create a new storage account. The &ldquo;Create a storage account&rdquo; blade will now be displayed.</li>
 </ol>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/9-manual-storage-account-create-2.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/9-manual-storage-account-create-2.jpg"
     alt="create-storage-account-from-portal-storage-account-information">
 </figure>
 
@@ -191,7 +191,7 @@ In our scenario the field contains the name of the root certification authority 
 <li>In the &ldquo;Region&rdquo; drop-down menu be sure to select the same region as where Azure VMware Solution is deployed. In our scenario <strong>Germany West Central</strong>.</li>
 <li>As this storage account has no need for changing any of the default settings, click &ldquo;Review&rdquo; at the bottom of the screen.</li>
 </ol>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/10-manual-storage-account-review.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/10-manual-storage-account-review.jpg"
     alt="create-storage-account-from-portal-storage-account-review">
 </figure>
 
@@ -201,7 +201,7 @@ In our scenario the field contains the name of the root certification authority 
 <li>Click &ldquo;Create&rdquo;.
 After a few minutes the creation of the storage account should be completed:</li>
 </ol>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/11-manual-storage-account-review-2.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/11-manual-storage-account-review-2.jpg"
     alt="create-storage-account-from-portal-storage-account-review-complete">
 </figure>
 
@@ -243,7 +243,7 @@ After a few minutes the creation of the storage account should be completed:</li
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;Storage Account already exists&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/12-automated-create-storage-account.jpg"
+</span></span></code></pre></div><figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/12-automated-create-storage-account.jpg"
     alt="scripted-creation-of-storage-account">
 </figure>
 
@@ -251,7 +251,7 @@ After a few minutes the creation of the storage account should be completed:</li
 <p>The next step is to create a blob container to help structure/organize the resources required for the LDAPS identity integration.
 The following content is divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
 <h3 id="manual-deployment-1">Manual deployment</h3>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/13-manual-create-container.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/13-manual-create-container.jpg"
     alt="create-storage-container">
 </figure>
 
@@ -286,7 +286,7 @@ The new container should now be created and displayed in the &ldquo;Containers&r
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>    write-output <span style="color:#e6db74">&#34;Container already exists&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/15-automated-create-storage-container.jpg"
+</span></span></code></pre></div><figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/15-automated-create-storage-container.jpg"
     alt="create-storage-container">
 </figure>
 
@@ -295,7 +295,7 @@ The new container should now be created and displayed in the &ldquo;Containers&r
 The following content is also divided into two sub-sections. One section will describe how the required procedure is performed manually through the Azure Portal and the other section describes a way to perform the required steps through automation.</p>
 <h3 id="manual-deployment-2">Manual deployment</h3>
 <p>As the first step, it is needed to &ldquo;enter&rdquo; the <strong>ldaps-blog-post</strong> container in the storage account:</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/16-manual-upload-certs-1.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/16-manual-upload-certs-1.jpg"
     alt="start-of-cert-upload-process">
 </figure>
 
@@ -304,7 +304,7 @@ The following content is also divided into two sub-sections. One section will de
 <li>Click the <strong>ldaps-blog-post</strong> container.</li>
 </ol>
 <p>We will now upload the certificates into the container:</p>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/17-manual-upload-certs-2.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/17-manual-upload-certs-2.jpg"
     alt="start-of-cert-upload-process-1">
 </figure>
 
@@ -313,7 +313,7 @@ The following content is also divided into two sub-sections. One section will de
 <li>In the top navigation, click &ldquo;⬆️ Upload&rdquo;;</li>
 <li>In the &ldquo;Upload blob&rdquo; panel, click the folder icon to select the certificates from your local hard drive.</li>
 </ol>
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/18-manual-upload-certs-3.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/18-manual-upload-certs-3.jpg"
     alt="start-of-cert-upload-process-3">
 </figure>
 
@@ -343,11 +343,11 @@ The following content is also divided into two sub-sections. One section will de
 </span></span><span style="display:flex;"><span>    $azureFileName = $localFilePath.Split(<span style="color:#e6db74">&#39;\&#39;</span>)[$localFilePath.Split(<span style="color:#e6db74">&#39;\&#39;</span>).count-<span style="color:#ae81ff">1</span>]
 </span></span><span style="display:flex;"><span>    Get-AzStorageAccount -Name $storageAccountName -ResourceGroupName $storageRgName | Get-AzStorageContainer -Name $containerName | Set-AzStorageBlobContent <span style="color:#f92672">-File</span> $localFilePath -Blob $azureFileName
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/21-automated-upload-certs-1.jpg"
+</span></span></code></pre></div><figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/21-automated-upload-certs-1.jpg"
     alt="scripted-cert-upload-1">
 </figure>
 
-<figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/22-automated-upload-certs-2.jpg"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/22-automated-upload-certs-2.jpg"
     alt="scripted-cert-upload-2">
 </figure>
 
@@ -397,7 +397,7 @@ After clicking &ldquo;Generate SAS token and URL&rdquo; an additional section wi
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">#$sasToken</span>
 </span></span><span style="display:flex;"><span>    write-host <span style="color:#e6db74">&#34;SASToken created: </span>$sasToken<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><figure><img src="/images/blogImages/2023/avs-ldaps-configure-part3/26-automated-sas-token-creation.jpg"
+</span></span></code></pre></div><figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part3/26-automated-sas-token-creation.jpg"
     alt="scripted=sas-token-creation">
 </figure>
 

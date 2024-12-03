@@ -92,7 +92,7 @@ Now you can click, &ldquo;Connect in browser&rdquo;. This will launch an <a href
 </p>
 <h2 id="gotcha">GOTCHA</h2>
 <p>You may hit your first error here.
-<figure><img src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-error-1.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-error-1.png"
     alt="Connect via portal to linux Azure Arc machine button - connection error">
 </figure>
 </p>
@@ -100,12 +100,12 @@ Now you can click, &ldquo;Connect in browser&rdquo;. This will launch an <a href
 <p>Configuring the <strong>Az</strong>ure <strong>c</strong>onnected <strong>ma</strong>chine <strong>agent</strong> is documented <a href="https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview">here</a> and the command we need is this.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>azcmagent config set incomingconnections.ports <span style="color:#ae81ff">22</span>
 </span></span></code></pre></div><p>Run this command on your linux machine (sudo will be needed)
-<figure><img src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-fix1.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-fix1.png"
     alt="Update port number from azcmagent">
 </figure>
 
 and then we can connect<br>
-<figure><img src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-connect-1.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-linux-vm-connect-1.png"
     alt="Connect via portal to linux Azure Arc machine is successful">
 </figure>
 </p>
@@ -115,7 +115,7 @@ and then we can connect<br>
 </figure>
 
 <p>The steps for connection from the portal and the required <strong>Az</strong>ure <strong>c</strong>onnected <strong>ma</strong>chine <strong>agent</strong> commands are the same. However we do need to get SSH working on the Windows Server, this is actually quite easy and simply needs some copy and paste, see <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell">here</a>. Once you have done that, your connection will work.</p>
-<figure><img src="/images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-windows-vm-connect-1.png"
+<figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/arc-ssh-windows-linux/connect-button-portal-windows-vm-connect-1.png"
     alt="Connect via portal to Windows Azure Arc machine is successful">
 </figure>
 

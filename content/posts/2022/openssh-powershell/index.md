@@ -50,7 +50,7 @@ $pubKey
 
 Example output from $pubkey below, this is what you need to copy and paste within the Azure Portal when creating a Linux VM.
 
-{{< figure src="/images/blogImages/2022/openssh-powershell/ssh-key-example.jpg" alt="ssh-key-example" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/openssh-powershell/ssh-key-example.jpg" alt="ssh-key-example" >}}
 
 If you want to use this key with an existing, you can. :smile: . We can perform a task similar to ssh-copy-id. Update the ***$destinationIp*** as needed.
 

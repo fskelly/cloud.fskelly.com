@@ -22,10 +22,10 @@ If you have been following along and you have used our previous article(s) - [AZ
 
 You are looking for the "5.3.54" version of the run commands and "New-LDAPSIdentitySource"
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-version.png" alt="new version of the tools" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-version.png" alt="new version of the tools" >}}
 
 You will notice that the "SSLCertificateSasUrl" field is now **OPTIONAL**. The "i" information bubble will now explain how it works. Basically the service now looks for the Domain Controllers based upon the information you provide and now connects and attempts to download the certificates automatically. Provided you have the pre-requisites in place, Like a Certificate Authority (CA), this works really well and speeds up the process tremendously and removes lot of complexity like dealing with Stroage Accounts, uploading the certificates and creating the required SAS Tokens.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-new-1.png" alt="information block explaining the new process" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-new-run-command/new-avs-run-command-new-1.png" alt="information block explaining the new process" >}}
 
 A very welcome change.

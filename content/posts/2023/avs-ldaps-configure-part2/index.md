@@ -31,7 +31,7 @@ Before we can configure integration with an external identity store (e.g. Active
 The first step in configuring DNS name resolution from the Azure VMware Solution networks (management and workload segments) is to add a DNS zone for Azure VMware.
 Login to the Azure Portal and select the Azure Active Directory tenant and Azure subscription where you have deployed your Azure VMware Solution Private Cloud.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part2/open-DNS-configuration-pane.jpg" alt="Open DNS Configuration" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part2/open-DNS-configuration-pane.jpg" alt="Open DNS Configuration" >}}
 
 As depicted in the image above:
 
@@ -44,7 +44,7 @@ The Azure Portal blade for configuring the Azure VMware Solution DNS configurati
 
 The Azure VMware Solution DNS configuration pane opens the section where "conditional DNS forwarder" zones are configured.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-1.jpg" alt="Advanced DNS Configuration" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-1.jpg" alt="Advanced DNS Configuration" >}}
 
 As shown in the image above:
 
@@ -57,13 +57,13 @@ As shown in the image above:
 
 After a few minutes, the DNS FQDN zone, **avsemea.com**, will be listed in the DNS blade for your Azure VMware Solution Private Cloud as shown below:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-2.jpg" alt="Advanced DNS Configuration 2" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-2.jpg" alt="Advanced DNS Configuration 2" >}}
 
 ## Attach the DNS zone configuration to the NSX-T DNS forwarder service ##
 
 Now that we created the DNS conditional forwarder zone we need to attach this zone to the NSX-T DNS service running in Azure VMware Solution to enable NSX-T to actually use the DNS conditional forwarder zone for use.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part2/Attach-the-DNS-zone-configuration-to-the-NSX-T-DNS-forwarder-service-1.jpg" alt="DNS and NSX-T Forwarder" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part2/Attach-the-DNS-zone-configuration-to-the-NSX-T-DNS-forwarder-service-1.jpg" alt="DNS and NSX-T Forwarder" >}}
 
 In the Azure VMware Solution DNS blade:
 
@@ -74,7 +74,7 @@ In the Azure VMware Solution DNS blade:
 
 When the change to the NSX-T DNS service is effectuated the **avsemea.com** DNS zone will now be listed in the DNS service configuration:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-2.jpg" alt="Advanced DNS Configuration 2" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part2/configure-the-required-DNS-zones-details-2.jpg" alt="Advanced DNS Configuration 2" >}}
 
 After this step the configuration of the Azure VMware Solution DNS service is complete.
 The next article in this series will describe the detailed steps in configuring LDAPS integration through the Azure portal or automation where possible.

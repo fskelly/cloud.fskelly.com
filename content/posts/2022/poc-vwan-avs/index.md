@@ -47,9 +47,9 @@ param deployExRConnection bool = true
 What to expect when deploying?
 
 1. You will get an ExpressRoute gateway. I set this as a "true" boolean value to cater for this.
-1. The deployment will happen over 2 resource groups - if deploying the "vnetconnection" option.  {{< figure src="/images/blogImages/2022/vwan-avs-poc/2resourcegoups.jpg" alt="deployment screenshot showing the 2 deployed resource groups" >}}
-1. It will look like nothing is happening in the Virtual WAN resource group. Show hidden items here.  {{< figure src="/images/blogImages/2022/vwan-avs-poc/showHiddenTypes.jpg" alt="deployment screenshot showing hidden items checked" >}}
-1. The deployment, if choosing anything Gateway related (VPN Gateway or ExpressRoute gateway) will take some time - up to 35 minutes.  {{< figure src="/images/blogImages/2022/vwan-avs-poc/vHubDeploy.jpg" alt="deployment screenshot showing times" >}}
+1. The deployment will happen over 2 resource groups - if deploying the "vnetconnection" option.  {{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/vwan-avs-poc/2resourcegoups.jpg" alt="deployment screenshot showing the 2 deployed resource groups" >}}
+1. It will look like nothing is happening in the Virtual WAN resource group. Show hidden items here.  {{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/vwan-avs-poc/showHiddenTypes.jpg" alt="deployment screenshot showing hidden items checked" >}}
+1. The deployment, if choosing anything Gateway related (VPN Gateway or ExpressRoute gateway) will take some time - up to 35 minutes.  {{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/vwan-avs-poc/vHubDeploy.jpg" alt="deployment screenshot showing times" >}}
 1. The deployment will deploy a VPN Gateway (on-premises to Azure)
 1. The deployment will deploy a ExR Gateway (Azure to AVS)
 

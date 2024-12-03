@@ -30,7 +30,7 @@ Navigate to Azure Portal and ensure you are on AVS Private Cloud blade
 1. Click "New-LDAPSIdentitySource".
 1. Ensure the correct Run is open before populating the required information.
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part4/1-run-command-1.jpg" alt="run-command-pane" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part4/1-run-command-1.jpg" alt="run-command-pane" >}}
 
 Populate the information as needed.
 
@@ -87,7 +87,7 @@ Navigate to the URL with your browser of choice and use your Directory Services 
 
 {{< figure src="/images/blogImages/2023/avs-ldaps-configure-part4/8-vmware-external-creds-checking-1.jpg" alt="ldaps vmware url logon 1" height="300" >}}
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part4/9-vmware-external-creds-checking-2.jpg" alt="ldaps vmware url logon 2" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2023/avs-ldaps-configure-part4/9-vmware-external-creds-checking-2.jpg" alt="ldaps vmware url logon 2" >}}
 
 Logon to Azure VMware Solution based components is now possible and should be now be working as expected.
 

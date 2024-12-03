@@ -21,7 +21,7 @@ As you all (probably) know by now Azure VMware Solution is a managed service off
 By default, after initial deployment of Azure VMware Solution, virtual machines do not have the ability to egress to the Internet. One of the options to enable Internet access is to "flip" the "Internet Enabled" toggle in the connectivity pane of the management blades in the Azure Portal:
 
 
-{{< figure src="/images/blogImages/2022/avs-to-internet-or-not/AVS-Connectivity-Settings-InternetEnabled.jpg" alt="internet enabled switch" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/avs-to-internet-or-not/AVS-Connectivity-Settings-InternetEnabled.jpg" alt="internet enabled switch" >}}
 
 Looks easy, but what does it do?
 

@@ -145,6 +145,6 @@ foreach ($queryItem in $queryItems)
 
 Results can be seen below. Our Locks are now in place. Since my account is an **owner**, I can delete the lock(s), *non-owner(s)* would **NOT** be able to delete locks.  
 
-{{< figure src="/images/blogImages/2022/using-arg-tolock-resources/resulting-locks.jpg" alt="resulting locks in azure" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static//images/blogImages/2022/using-arg-tolock-resources/resulting-locks.jpg" alt="resulting locks in azure" >}}
 
 This code and concept can be easily updated or modified to meet different your specific requirements.
