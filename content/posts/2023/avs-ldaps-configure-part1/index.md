@@ -59,7 +59,7 @@ Our lab environment also holds some additional resources that are not required f
 
 A graphical representation of our lab environment is shown below:
 
-{{< figure src="/images/blogImages/2023/avs-ldaps-configure-part1/FTA-lab-environment.jpg" alt="FTA Lab Environment" >}}
+{{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2023/avs-ldaps-configure-part1/FTA-lab-environment.jpg" alt="FTA Lab Environment" >}}
 
 While guiding you through the process of gathering all required details and artifacts and using them to complete the LDAPS integration for AVS, we assume that you have all resources mentioned in the table required resources available and that sufficient access permissions are in place.
 
