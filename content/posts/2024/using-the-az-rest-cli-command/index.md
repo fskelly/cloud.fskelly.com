@@ -19,8 +19,8 @@ These are the principal / considerations
 
 Ok, so down to business, the tool/command that I am using is “az rest”. Using this tool is quite easy but thanks to some additional insights from a colleague in my team you can make it even easier. So, how do we use the command. Let’s say we wanted to make the following request – Virtual Machines – List.
 
-
 The command looks like this.
+
 ```bash
 GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01
 ```
@@ -30,8 +30,8 @@ We need to provide some variable(s) or information as marked by items in braces 
 **Please remember to login first az login, as the az rest command uses the context of the currently authenticated to Azure user, hence no auth tokens.**
 
 Here is a quick shell script to show this and allow you to test.
+
 ```bash
-	
 # Set your variables here
 subscriptionId="<your_subscription_id>"
 resourceGroupName="<your_resource_group_name>"
@@ -51,7 +51,7 @@ You will get a result similar to the below,
 
 For me and the testing I am doing, this is a great, rapid and repeatable way of testing queries and quickly testing if the URI is valid before spending many hours troubleshooting the **"why is this not working"** versus **"is my URI correct"**.
 
-What is also quite handy is the fact that the **"https://management.azure.com"** aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example
+What is also quite handy is the fact that the **"<https://management.azure.com>"** aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example
 
 {{< figure src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/result2.png" alt="az rest result2" >}}
 

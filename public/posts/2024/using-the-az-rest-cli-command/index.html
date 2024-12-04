@@ -71,8 +71,7 @@ Aug. 29, 2024
 </span></span></code></pre></div><p>We need to provide some variable(s) or information as marked by items in braces (“{}”), so we need to provide <strong>&ldquo;subscriptionId&rdquo;</strong> and <strong>&ldquo;resourceGroupName&rdquo;</strong>. I will endeavour to provide as much information as possible, however for safety reason, some items will be obfuscated.</p>
 <p><strong>Please remember to login first az login, as the az rest command uses the context of the currently authenticated to Azure user, hence no auth tokens.</strong></p>
 <p>Here is a quick shell script to show this and allow you to test.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set your variables here</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Set your variables here</span>
 </span></span><span style="display:flex;"><span>subscriptionId<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;your_subscription_id&gt;&#34;</span>
 </span></span><span style="display:flex;"><span>resourceGroupName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;your_resource_group_name&gt;&#34;</span>
 </span></span><span style="display:flex;"><span> 
@@ -86,9 +85,12 @@ Aug. 29, 2024
     alt="az rest result">
 </figure>
 
-<!-- raw HTML omitted -->
+<!-- <figure><img src="/images/blogImages/2024/using-az-rest-cli-command/result1.png"
+    alt="az rest result">
+</figure>
+ -->
 <p>For me and the testing I am doing, this is a great, rapid and repeatable way of testing queries and quickly testing if the URI is valid before spending many hours troubleshooting the <strong>&ldquo;why is this not working&rdquo;</strong> versus <strong>&ldquo;is my URI correct&rdquo;</strong>.</p>
-<p>What is also quite handy is the fact that the <strong>&ldquo;<a href="https://management.azure.com">https://management.azure.com</a>&rdquo;</strong> aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example</p>
+<p>What is also quite handy is the fact that the <strong>&quot;<a href="https://management.azure.com">https://management.azure.com</a>&quot;</strong> aspect can be dropped as this is already assumed, and as such you run a query directly against the ID to get more information or an ID returned from an Azure Resource Graph Query, with the correct API version appended in this example</p>
 <figure><img src="https://raw.githubusercontent.com/fskelly/cloud.fskelly.com/main/static/images/blogImages/2024/using-az-rest-cli-command/result2.png"
     alt="az rest result2">
 </figure>

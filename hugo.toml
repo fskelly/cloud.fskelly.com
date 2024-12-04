@@ -28,3 +28,8 @@ languageCode = "en-us"
 
 [taxonomies]
   year = "years"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
