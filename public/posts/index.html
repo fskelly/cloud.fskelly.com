@@ -226,6 +226,34 @@ Navigate to Azure Portal and ensure you are on AVS Private Cloud blade</p>
     
         <div class="post">
             <p>
+                <div class="date">Jan. 9, 2023</div>    
+                <h1><a href="http://localhost:1313/posts/2023/avs-ldaps-configure/" title="How to configure LDAPS with AVS">How to configure LDAPS with AVS</a></h1>
+                <p>In this post, we are going to be configuring LDAPS (LDAP Over SSL) for Azure Vmware Solution (AVS).</p>
+<p>Pre-requisites</p>
+<ol>
+<li>Jump Box</li>
+<li>RSAT Tools</li>
+<li>PowerShell installed</li>
+</ol>
+<p>The expected outcome</p>
+<ul>
+<li><a href="#variables-we-used-and-information-you-need">Variables we used and information you need</a></li>
+<li><a href="#1-log-into-azure">1. Log into Azure</a></li>
+<li><a href="#2-export-required-certificates">2. Export required certificates</a></li>
+<li><a href="#3-create-a-storage-account">3. Create a storage account</a></li>
+<li><a href="#4-create-a-container">4. Create a container</a></li>
+<li><a href="#5-upload-certificates-to-container">5. Upload certificates to container</a></li>
+<li><a href="#6-create-the-sas-tokens">6. Create the SAS Tokens</a></li>
+<li><a href="#execute-the-avs-run-command">Execute the AVS Run Command</a></li>
+</ul>
+<p>The plan is to automate as much of this process as possible. We will use PowerShell to complete steps 1-6 as above. For now, step 7 needs to be manual, we are working on automating this as well.</p>
+            </p>
+        </div>
+    
+
+    
+        <div class="post">
+            <p>
                 <div class="date">Oct. 3, 2022</div>    
                 <h1><a href="http://localhost:1313/posts/2022/using-arg-tolock-resources/" title="Using Azure Resource Graph and Tags to lock items in Azure">Using Azure Resource Graph and Tags to lock items in Azure</a></h1>
                 <h2 id="what-are-we-doing">What are we doing?</h2>
