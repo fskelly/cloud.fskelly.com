@@ -5,14 +5,13 @@ date = "2019-01-01"
 
 ## Who Am I?
 
-I am a Microsoft Employee, working within Azure Engineering as Senior Software ENgineer with the AzRel (Azure Reliability) yeam, previously as a FastTrack For Azure (FTA) Engineer, focusing primarily on Infra and working with customers across the globe with their respective journeys to the cloud and before that I was previously a Cloud Solutions Architect (CSA) for Microsoft as well. I was in the Microsoft Partner space for many years before that.
+I am a Microsoft Employee, working within Azure Engineering as Senior Software Engineer with the AzRel (Azure Reliability) team, previously as a FastTrack For Azure (FTA) Engineer, focusing primarily on Infra and working with customers across the globe with their respective journeys to the cloud and before that I was previously a Cloud Solutions Architect (CSA) for Microsoft as well. I was in the Microsoft Partner space for many years before that.
 
 ## What is Azure Reliability?
 
 Azure Reliability (AzRel) is a specialized team within Azure Engineering focused on ensuring the reliability and availability of Azure services. The team works on building and maintaining systems that can withstand failures and continue to operate smoothly. This involves implementing best practices for high availability, disaster recovery, and performance optimization to provide a seamless experience for Azure customers.
 
 [Learn more about Azure Reliability](https://learn.microsoft.com/en-us/azure/site-reliability-engineering/)
-
 
 ## What is FastTrack For Azure?
 
